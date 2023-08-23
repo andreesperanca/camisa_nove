@@ -38,9 +38,12 @@ fun ManagerScreen(modifier: Modifier = Modifier) {
 
     val tabList = listOf(
         TabItem.OverView,
-        TabItem.Finance
+        TabItem.Finance,
+        TabItem.Players,
+        TabItem.Confirmation,
+        TabItem.Timer
     )
-    var pagerState = rememberPagerState(pageCount = tabList.size)
+    val pagerState = rememberPagerState(pageCount = tabList.size)
 
     Scaffold(
         topBar = {
@@ -62,23 +65,10 @@ fun ManagerScreen(modifier: Modifier = Modifier) {
                         }
                     }
                 )
-
                 TabLayout(tabs = tabList, pagerState = pagerState)
-//                ScrollableTabRow(
-//                    edgePadding = 0.dp,
-//                    selectedTabIndex = state) {
-//                    tabList.forEachIndexed { index, tabBarItem ->
-//                        Tab(
-//                            selected = state == index,
-//                            onClick = { state = index },
-//                            icon =  {   Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Localized description")},
-//                            text = { Text(text = tabBarItem.title, maxLines = 2, overflow = TextOverflow.Ellipsis) }
-//                        )
-//                    }
-//                }
             }
         },
-        content = {paddingValues ->
+        content = { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues))
             {
                 TabContent(pagerState)

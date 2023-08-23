@@ -94,7 +94,8 @@ fun FinanceContent(modifier: Modifier = Modifier) {
 
         Text(
             modifier = Modifier
-                .padding(start = 16.dp),
+                .padding(start = 18.dp)
+                .fillMaxWidth(),
             fontSize = 13.sp,
             color = Color(0xFF49454F),
             text ="Vizualizar histórico completo")

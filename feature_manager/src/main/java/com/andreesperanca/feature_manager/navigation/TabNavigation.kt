@@ -15,8 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.andreesperanca.feature_manager.screens.ConfirmationContent
 import com.andreesperanca.feature_manager.screens.FinanceContent
 import com.andreesperanca.feature_manager.screens.OverViewContent
+import com.andreesperanca.feature_manager.screens.PlayersContent
+import com.andreesperanca.feature_manager.screens.TimerContent
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -38,6 +41,9 @@ fun FeatureManagerNavHost(
         }
         composable("finance") {
             FinanceContent()
+        }
+        composable("finance") {
+            PlayersContent()
         }
     }
 }
@@ -74,15 +80,11 @@ fun TabLayout(tabs: List<TabItem>, pagerState: PagerState) {
 fun TabContent(pagerState: PagerState) {
     HorizontalPager(state = pagerState) { index ->
         when (index) {
-            0 -> {
-                OverViewContent()
-            }
-
-            1 -> {
-                FinanceContent()
-            }
+            0 -> { OverViewContent() }
+            1 -> { FinanceContent() }
+            2 -> { PlayersContent() }
+            3 -> { ConfirmationContent() }
+            4 -> { TimerContent() }
         }
-
     }
-
 }
