@@ -1,4 +1,4 @@
-package com.andreesperanca.feature_manager.screens
+package com.andreesperanca.feature_manager.screens.overview
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -16,16 +16,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.andreesperanca.feature_manager.R
+import com.andreesperanca.ui_components.components.DescriptionMedium
+import com.andreesperanca.ui_components.components.TitleMedium
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun OverViewContent(modifier: Modifier = Modifier) {
+
+    val singapore = LatLng(1.35, 103.87)
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -33,52 +50,54 @@ fun OverViewContent(modifier: Modifier = Modifier) {
             .padding(top = 32.dp, bottom = 32.dp)
     )
     {
-        Image(
+        AsyncImage(
+            model =
+
+            ImageRequest.Builder(LocalContext.current)
+                .data("https://www.sogipa.com.br/web/imgs/imagens/imagens5d121ec0_2.jpeg")
+                .crossfade(true)
+                .build(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             contentScale = ContentScale.Crop,
-            painter = painterResource(id = R.drawable.ic_test), contentDescription = "Group image")
+            contentDescription = "")
 
-        Text(
+        TitleMedium(
+            modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+            text = "Amigos do André")
+
+        DescriptionMedium(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF1D1B20),
-            text = "Amigos do André")
-
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
-            fontSize = 16.sp,
-            color = Color(0xFF49454F),
             text = "Futebol dos amigos do André para se divertir muito com a pelada doida.")
 
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, top = 16.dp),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF1D1B20),
-            text = "Local")
-
-        Image(
+        TitleMedium(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(150.dp)
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp),
-            contentScale = ContentScale.Crop,
-            painter = painterResource(id = R.drawable.ic_test), contentDescription = "Group image")
+                .padding(start = 16.dp, top = 16.dp),
+            text = "Local")
 
+        GoogleMap(
+            modifier = Modifier.fillMaxWidth()
+                .height(300.dp),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = singapore),
+                title = "Singapore",
+                snippet = "Marker in Singapore"
+            )
+        }
 
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF1D1B20),
+        TitleMedium(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
             text = "Regras")
 
         Row(

@@ -17,7 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.andreesperanca.feature_manager.screens.ConfirmationContent
 import com.andreesperanca.feature_manager.screens.FinanceContent
-import com.andreesperanca.feature_manager.screens.OverViewContent
+import com.andreesperanca.feature_manager.screens.overview.OverViewContent
 import com.andreesperanca.feature_manager.screens.PlayersContent
 import com.andreesperanca.feature_manager.screens.TimerContent
 import com.google.accompanist.pager.ExperimentalPagerApi

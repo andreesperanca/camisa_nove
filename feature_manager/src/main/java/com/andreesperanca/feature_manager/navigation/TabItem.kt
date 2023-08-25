@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.andreesperanca.feature_manager.screens.ConfirmationContent
 import com.andreesperanca.feature_manager.screens.FinanceContent
-import com.andreesperanca.feature_manager.screens.OverViewContent
+import com.andreesperanca.feature_manager.screens.overview.OverViewContent
 import com.andreesperanca.feature_manager.screens.PlayersContent
 import com.andreesperanca.feature_manager.screens.TimerContent
 

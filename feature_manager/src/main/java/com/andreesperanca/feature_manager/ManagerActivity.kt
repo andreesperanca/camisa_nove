@@ -17,6 +17,8 @@ class ManagerActivity : ComponentActivity() {
         setContent {
             CamisaNoveTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    val packageName = applicationContext.packageName
+
                     ManagerScreen()
                 }
             }
