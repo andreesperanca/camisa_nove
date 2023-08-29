@@ -1,8 +1,6 @@
 package com.andreesperanca.feature_manager.navigation
 
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -16,10 +14,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.andreesperanca.feature_manager.screens.ConfirmationContent
-import com.andreesperanca.feature_manager.screens.FinanceContent
-import com.andreesperanca.feature_manager.screens.overview.OverViewContent
+import com.andreesperanca.feature_manager.screens.finance.FinanceContent
 import com.andreesperanca.feature_manager.screens.PlayersContent
 import com.andreesperanca.feature_manager.screens.TimerContent
+import com.andreesperanca.feature_manager.screens.overview.OverViewContent
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -67,7 +65,7 @@ fun TabLayout(tabs: List<TabItem>, pagerState: PagerState) {
                         pagerState.animateScrollToPage(index)
                     }
                 },
-                icon = { Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Localized description") },
+                icon = { Icon(imageVector = tabBarItem.icon, contentDescription = "Localized description") },
                 text = { Text(text = tabBarItem.title, maxLines = 2, overflow = TextOverflow.Ellipsis) }
             )
         }

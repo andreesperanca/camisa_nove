@@ -10,8 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.andreesperanca.camisanove.screen.MainScreen
-import com.andreesperanca.feature_manager.screens.FinanceContent
-import com.andreesperanca.feature_manager.screens.ManagerScreen
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 
 class MainActivity : ComponentActivity() {

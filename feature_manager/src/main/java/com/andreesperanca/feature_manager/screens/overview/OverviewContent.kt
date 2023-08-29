@@ -1,18 +1,21 @@
 package com.andreesperanca.feature_manager.screens.overview
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -31,6 +34,7 @@ import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
@@ -52,7 +56,6 @@ fun OverViewContent(modifier: Modifier = Modifier) {
     {
         AsyncImage(
             model =
-
             ImageRequest.Builder(LocalContext.current)
                 .data("https://www.sogipa.com.br/web/imgs/imagens/imagens5d121ec0_2.jpeg")
                 .crossfade(true)
@@ -61,35 +64,45 @@ fun OverViewContent(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(16.dp),
             contentScale = ContentScale.Crop,
-            contentDescription = "")
+            contentDescription = ""
+        )
 
         TitleMedium(
             modifier =
             Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
-            text = "Amigos do André")
+            text = "Amigos do André"
+        )
 
         DescriptionMedium(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
-            text = "Futebol dos amigos do André para se divertir muito com a pelada doida.")
+            text = "Futebol dos amigos do André para se divertir muito com a pelada doida."
+        )
 
         TitleMedium(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp),
-            text = "Local")
+            text = "Local"
+        )
 
+        /** Focus in soccer locale **/
         GoogleMap(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
                 .height(300.dp),
+            uiSettings = MapUiSettings(
+                compassEnabled = true
+            ),
             cameraPositionState = cameraPositionState
         ) {
             Marker(
                 state = MarkerState(position = singapore),
-                title = "Singapore",
+                title = "Futebol - Amigos do André",
                 snippet = "Marker in Singapore"
             )
         }
@@ -98,62 +111,71 @@ fun OverViewContent(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-            text = "Regras")
+            text = "Regras"
+        )
 
-        Row(
+
+        Box(
             modifier = Modifier
+                .heightIn(48.dp)
                 .fillMaxWidth()
-                .padding(start = 16.dp, top = 16.dp),
-            horizontalArrangement = Arrangement.Center,
+        ) {
+            Row(
+                modifier = Modifier
+                    .clickable {
+                    }
+                    .align(Alignment.Center)
+                    .padding(PaddingValues(8.dp))
             ) {
-            Text(modifier = Modifier,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF1D1B20),
-                text = "Download aqui")
-
-            Icon(
-                modifier = Modifier.padding(start = 4.dp),
-                painter = painterResource(id = R.drawable.ic_test), contentDescription = "icon donwlaod")
+                Text(
+                    modifier = Modifier,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF1D1B20),
+                    text = "Download aqui"
+                )
+                Icon(
+                    modifier = Modifier.padding(start = 4.dp),
+                    painter = painterResource(id = R.drawable.ic_download), contentDescription = "icon donwload"
+                )
+            }
         }
 
-        Text(
+
+        TitleMedium(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            text = "Data"
+        )
+
+        DescriptionMedium(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF1D1B20),
-            text = "Data")
+            text = "Todos aos sábados"
+        )
 
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-            fontSize = 16.sp,
-            color = Color(0xFF49454F),
-            text = "Todos aos sábados")
+        TitleMedium(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            text = "Valores"
+        )
 
-        Text(
+        DescriptionMedium(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF1D1B20),
-            text = "Valores")
+            text = "Avulsos: R\$ 15,00"
+        )
 
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
-            fontSize = 16.sp,
-            color = Color(0xFF49454F),
-            text = "Avulsos: R\$ 15,00")
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
-            fontSize = 16.sp,
-            color = Color(0xFF49454F),
-            text = "Mensalistas: R\$450,00")
+        DescriptionMedium(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+            text = "Mensalistas: R\$450,00"
+        )
     }
 }
 
