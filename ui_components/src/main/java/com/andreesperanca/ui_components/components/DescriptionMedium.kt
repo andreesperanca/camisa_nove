@@ -20,3 +20,15 @@ fun DescriptionMedium(
         text = text
     )
 }
+
+@Composable
+fun DescriptionSubtitleMedium(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(modifier = modifier,
+        fontSize = 14.sp,
+        color = Color(0xFF49454F),
+        text = text
+    )
+}

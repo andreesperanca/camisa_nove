@@ -16,14 +16,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreesperanca.feature_manager.data.translationsList
 import com.andreesperanca.feature_manager.models.Transaction
+import com.andreesperanca.ui_components.components.DescriptionMedium
+import com.andreesperanca.ui_components.components.DescriptionSubtitleMedium
+import com.andreesperanca.ui_components.components.SubtitleMedium
+import com.andreesperanca.ui_components.components.TitleMedium
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 
 @Composable
 fun TransactionItem(
     modifier: Modifier = Modifier,
-    transaction: Transaction
-
-                    ) {
+    transaction: Transaction) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -34,28 +36,22 @@ fun TransactionItem(
         Column(
             modifier = Modifier.align(Alignment.TopStart)
         ) {
-            Text(
+
+            SubtitleMedium(
                 modifier = Modifier.padding(start = 8.dp, top = 8.dp),
-                fontSize = 16.sp,
-                color = Color(0xFF1D1B20),
-                text = transaction.payer,
+                text = transaction.payer
             )
-            Text(
+
+            DescriptionSubtitleMedium(
                 modifier = Modifier.padding(start = 8.dp),
-                fontSize = 13.sp,
-                color = Color(0xFF49454F),
-                text = transaction.payer,
-            )
+                text = transaction.payer)
         }
 
-        Text(
+        TitleMedium(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .padding(end = 8.dp),
-                fontSize = 13.sp,
-                color = Color(0xFF238700),
-                text = transaction.value.toString(),
-            )
+            text = "R$ ${transaction.value}")
     }
     
 }

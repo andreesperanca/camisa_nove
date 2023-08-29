@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreesperanca.feature_manager.components.TransactionItem
 import com.andreesperanca.feature_manager.data.translationsList
+import com.andreesperanca.ui_components.components.DescriptionMedium
+import com.andreesperanca.ui_components.components.TitleMedium
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 
 
@@ -34,12 +36,10 @@ import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 @Composable
 fun FinanceContent(modifier: Modifier = Modifier) {
     Column(modifier = modifier.fillMaxSize()) {
-        Text(
+
+        TitleMedium(
             modifier = Modifier.padding(start = 16.dp, top = 32.dp),
-            text = "Conta",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black
+            text = "Conta"
         )
 
         Text(
@@ -69,14 +69,12 @@ fun FinanceContent(modifier: Modifier = Modifier) {
         Row(modifier = Modifier
             .padding(top = 32.dp)) {
             Box(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = 16.dp),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF1D1B20),
-                text = "Transações recentes")
+
+                TitleMedium(
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(start = 16.dp),
+                    text = "Transações recentes")
 
                 Icon(
                     modifier = Modifier
@@ -87,15 +85,6 @@ fun FinanceContent(modifier: Modifier = Modifier) {
 
             }
         }
-
-        Text(
-            modifier = Modifier
-                .padding(start = 18.dp)
-                .fillMaxWidth(),
-            fontSize = 13.sp,
-            color = Color(0xFF49454F),
-            text ="Vizualizar histórico completo")
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(),

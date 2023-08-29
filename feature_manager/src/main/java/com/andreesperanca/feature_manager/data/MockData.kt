@@ -6,10 +6,10 @@ import com.andreesperanca.feature_manager.models.TransactionType
 
 val translationsList = listOf(
     Transaction(
-        id = 1L, value = 18F, payer = "André", description = "Olá", type = TransactionType.EXPENSE
+        id = 1L, value = 18F, payer = "Pagamento Mensal", description = "Olá", type = TransactionType.EXPENSE
     ),
     Transaction(
-        id = 1L, value = 18F, payer = "André", description = "Olá", type = TransactionType.EXPENSE
+        id = 1L, value = 18F, payer = "Pagamento do mensal do André", description = "Olá", type = TransactionType.EXPENSE
     )
 )
 

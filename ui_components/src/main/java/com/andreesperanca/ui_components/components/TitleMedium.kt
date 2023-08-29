@@ -19,5 +19,19 @@ fun TitleMedium(
         fontSize = 18.sp,
         fontWeight = FontWeight.Medium,
         color = Color(0xFF1D1B20),
-        text = text)
+        text = text
+    )
+}
+
+@Composable
+fun SubtitleMedium(
+    modifier: Modifier = Modifier,
+    text: String) {
+    Text(
+        modifier = modifier,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Medium,
+        color = Color(0xFF1D1B20),
+        text = text
+    )
 }
