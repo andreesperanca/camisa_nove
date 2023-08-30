@@ -3,7 +3,8 @@
     <application>
         <activity
             android:name=".ManagerActivity"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
         </activity>
     </application>
 </manifest>
