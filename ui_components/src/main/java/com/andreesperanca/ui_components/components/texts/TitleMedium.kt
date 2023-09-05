@@ -1,4 +1,4 @@
-package com.andreesperanca.ui_components.components
+package com.andreesperanca.ui_components.components.texts
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

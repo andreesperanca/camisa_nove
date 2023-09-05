@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.andreesperanca.feature_manager.R
-import com.andreesperanca.ui_components.components.DescriptionMedium
-import com.andreesperanca.ui_components.components.TitleMedium
+import com.andreesperanca.ui_components.components.texts.DescriptionMedium
+import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
