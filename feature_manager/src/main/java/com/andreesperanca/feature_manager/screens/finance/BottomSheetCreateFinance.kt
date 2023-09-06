@@ -1,21 +1,18 @@
 package com.andreesperanca.feature_manager.screens.finance
 
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.RadioButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DatePicker
@@ -35,13 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andreesperanca.ui_components.components.buttons.DefaultButton
-import com.andreesperanca.ui_components.components.texts.TitleMedium
+import com.andreesperanca.ui_components.components.radio_button.RadioButtonDefault
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -51,13 +46,14 @@ import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
+fun BottomSheetCreateFinance(
+    modifier: Modifier = Modifier,
+    closeClick: () -> Unit)
+{
     Column(
         modifier = modifier
-            .verticalScroll(state = rememberScrollState())
-        ,
-        horizontalAlignment = Alignment.CenterHorizontally
-    )
+            .verticalScroll(state = rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally)
     {
 
 //        val focusRequester = remember { FocusRequester() }
@@ -75,7 +71,6 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
         }
 
         var titleValue by remember { mutableStateOf("") }
-        var descriptionValue by remember { mutableStateOf("") }
         var transitionValue by remember { mutableStateOf("") }
 
         CenterAlignedTopAppBar(
@@ -88,10 +83,10 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
             },
             navigationIcon = {
                 IconButton(onClick = {
-                    showDatePickerDialog = !showDatePickerDialog
+                    closeClick()
                 }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.Filled.Close,
                         contentDescription = "Localized description"
                     )
                 }
@@ -126,7 +121,7 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
                 value = selectedDate,
                 onValueChange = { },
                 Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .padding(start = 16.dp, top = 8.dp, bottom = 8.dp)
                     .onFocusEvent {
                         if (it.isFocused) {
                             showDatePickerDialog = !showDatePickerDialog
@@ -141,9 +136,11 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
                 singleLine = true,
             )
 
+            Spacer(modifier = Modifier.padding(8.dp))
+
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                    .padding(end = 16.dp, top = 8.dp, bottom = 8.dp)
                     .widthIn(80.dp)
                     .weight(0.5f),
                 value = transitionValue,
@@ -157,31 +154,8 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
 
 
         }
-
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .selectableGroup(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(text = "Despesa")
-                RadioButton(
-                    selected = state,
-                    onClick = { state = true },
-                    modifier = Modifier.semantics { contentDescription = "Localized Description" }
-                )
-                Text(text = "Receita")
-                RadioButton(
-                    selected = !state,
-                    onClick = { state = false },
-                    modifier = Modifier.semantics { contentDescription = "Localized Description" }
-                )
-            }
-        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        RadioButtonDefault()
 
         OutlinedTextField(modifier = Modifier
             .fillMaxWidth()
@@ -190,27 +164,16 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
             onValueChange = {
                 titleValue = it
             },
-            label = { Text(text = "Title") },
+            label = { Text(text = "Description transaction") },
             singleLine = true,
             placeholder = { Text(text = "Enter with title") },
         )
-
-        OutlinedTextField(
+        
+        DefaultButton(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            value = descriptionValue,
-            onValueChange = {
-                descriptionValue = it
-            },
-            singleLine = true,
-            label = { Text(text = "Subtitle") },
-            placeholder = { Text(text = "Enter with subtitle") },
-        )
-
-        DefaultButton(modifier = Modifier
             .fillMaxWidth()
-            .padding(paddingValues = PaddingValues(16.dp))
+            .padding(paddingValues = PaddingValues(16.dp)),
+            onClickCta = {}
         )
     }
 }
@@ -219,7 +182,7 @@ fun BottomSheetCreateFinance(modifier: Modifier = Modifier) {
 @Composable
 fun BottomSheetCreateFinancePreview() {
     CamisaNoveTheme() {
-        BottomSheetCreateFinance()
+        BottomSheetCreateFinance(closeClick = {})
     }
 }
 

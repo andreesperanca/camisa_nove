@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TitleMedium(
     modifier: Modifier = Modifier,
-    text: String) {
+    text: String,
+    titleColor: Color = Color(0xFF1D1B20)
+    ) {
     Text(
         modifier = modifier,
         fontSize = 18.sp,
         fontWeight = FontWeight.Medium,
-        color = Color(0xFF1D1B20),
+        color = titleColor,
         text = text
     )
 }

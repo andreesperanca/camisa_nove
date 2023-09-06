@@ -67,7 +67,11 @@ fun FinanceContent(modifier: Modifier = Modifier) {
             topEnd = 16.dp
         ),
         sheetContent = {
-            BottomSheetCreateFinance()
+            BottomSheetCreateFinance(closeClick = {
+                coroutineScope.launch {
+                    sheetState.hide()
+                }
+            })
         }
     ) {
         Column(modifier = modifier.fillMaxSize()) {
