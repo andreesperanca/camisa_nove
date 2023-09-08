@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
 import com.andreesperanca.feature_manager.screens.ConfirmationContent
 import com.andreesperanca.feature_manager.screens.finance.FinanceContent
 import com.andreesperanca.feature_manager.screens.overview.OverViewContent
@@ -14,7 +15,8 @@ typealias ComposableFun = @Composable () -> Unit
 sealed class TabItem(
     var icon: ImageVector,
     val title: String,
-    var screen: ComposableFun
+    var screen: ComposableFun,
+    var navController: NavController? = null
 ) {
 
     object OverView: TabItem(
@@ -26,7 +28,7 @@ sealed class TabItem(
     object Finance: TabItem(
         title = "Finance",
         icon = Icons.Filled.Info,
-        screen =  { FinanceContent() }
+        screen =  { FinanceContent() },
     )
 
     object Players: TabItem(

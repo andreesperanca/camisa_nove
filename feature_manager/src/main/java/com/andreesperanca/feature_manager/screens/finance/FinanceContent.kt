@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreesperanca.feature_manager.components.TransactionItem
 import com.andreesperanca.feature_manager.data.translationsList
+import com.andreesperanca.feature_manager.navigation.TabItem
+import com.andreesperanca.feature_manager.navigation.tabList
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 import kotlinx.coroutines.launch
@@ -119,10 +121,18 @@ fun FinanceContent(modifier: Modifier = Modifier) {
                         .align(Alignment.CenterEnd)
                         .padding(end = 8.dp)
                         .clickable {
-                            coroutineScope.launch {
-                                if (sheetState.isVisible) sheetState.hide()
-                                else sheetState.show()
+                            tabList.filter { it == TabItem.Finance }.first().apply {
+                                navController?.navigate(
+                                    "create_finance_screen")
                             }
+
+                            tabList.indexOf(TabItem.Finance)
+//                            coroutineScope.launch {
+//                                if (sheetState.isVisible) sheetState.hide()
+//                                else sheetState.show()
+//                            }
+
+
                         }) {
                         Icon(
                             modifier = Modifier.padding(PaddingValues(8.dp)),

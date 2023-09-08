@@ -154,8 +154,6 @@ fun BottomSheetCreateFinance(
 
 
         }
-        Spacer(modifier = Modifier.padding(8.dp))
-        RadioButtonDefault()
 
         OutlinedTextField(modifier = Modifier
             .fillMaxWidth()
@@ -169,12 +167,18 @@ fun BottomSheetCreateFinance(
             placeholder = { Text(text = "Enter with title") },
         )
         
+        Spacer(modifier = Modifier.padding(8.dp))
+
+        RadioButtonDefault(modifier = Modifier.padding(bottom = 16.dp))
+        
         DefaultButton(
             modifier = Modifier
-            .fillMaxWidth()
-            .padding(paddingValues = PaddingValues(16.dp)),
+                .fillMaxWidth()
+                .padding(paddingValues = PaddingValues(16.dp)),
             onClickCta = {}
         )
+        
+        Spacer(modifier = Modifier.padding(bottom = 16.dp))
     }
 }
 

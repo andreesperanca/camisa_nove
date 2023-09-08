@@ -9,40 +9,29 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.andreesperanca.feature_manager.navigation.TabContent
-import com.andreesperanca.feature_manager.navigation.TabItem
 import com.andreesperanca.feature_manager.navigation.TabLayout
+import com.andreesperanca.feature_manager.navigation.tabList
+import com.andreesperanca.ui_components.theme.CamisaNoveTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
 //REVIEW SUPPRESS LINTS
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun ManagerScreen(modifier: Modifier = Modifier) {
-
-    val navController: NavHostController = rememberNavController()
-    var state by remember  { mutableStateOf(0) }
-
-    val tabList = listOf(
-        TabItem.OverView,
-        TabItem.Finance,
-        TabItem.Players,
-        TabItem.Confirmation,
-        TabItem.Timer
-    )
+fun ManagerScreen(
+    modifier: Modifier = Modifier,
+    navController: NavHostController) {
     val pagerState = rememberPagerState(pageCount = tabList.size)
 
     Scaffold(
@@ -69,9 +58,11 @@ fun ManagerScreen(modifier: Modifier = Modifier) {
             }
         },
         content = { paddingValues ->
-            Column(modifier = Modifier.padding(paddingValues))
-            {
-                TabContent(pagerState)
+            Surface(modifier = Modifier.padding(paddingValues)) {
+                HorizontalPager(state = pagerState) { index ->
+                    tabList[index].navController = navController
+                    tabList[index].screen()
+                }
             }
         }
     )
@@ -80,7 +71,8 @@ fun ManagerScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun ManagerScreenPreview() {
-    com.andreesperanca.ui_components.theme.CamisaNoveTheme {
-        ManagerScreen()
+    CamisaNoveTheme {
+        val navController = rememberNavController()
+        ManagerScreen(navController = navController)
     }
 }

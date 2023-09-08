@@ -12,6 +12,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -37,11 +39,15 @@ fun RadioButtonDefault(
     val expenseColor: Color
 
     if (isChecked.value) {
-        revenueColor = Color(0xFF90EE90)
+        revenueColor = MaterialTheme.colorScheme.primary
+
+//            Color(0xFF90EE90)
         expenseColor = Color.Gray
     } else {
         revenueColor = Color.Gray
-        expenseColor = Color(0xFFFF6B6B)
+        expenseColor = MaterialTheme.colorScheme.primary
+
+//            Color(0xFFFF6B6B)
     }
 
     Row(
@@ -49,13 +55,13 @@ fun RadioButtonDefault(
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        Card(
+        OutlinedCard(
             shape = RoundedCornerShape(4.dp),
             modifier = Modifier
                 .weight(0.5f)
                 .wrapContentHeight()
                 .padding(start = 16.dp),
-            colors = CardDefaults.cardColors(containerColor = revenueColor),
+
             elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
             onClick = {
                 isChecked.value = !isChecked.value
