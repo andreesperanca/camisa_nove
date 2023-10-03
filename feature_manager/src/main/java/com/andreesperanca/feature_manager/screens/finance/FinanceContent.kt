@@ -39,11 +39,12 @@ import com.andreesperanca.feature_manager.data.translationsList
 import com.andreesperanca.feature_manager.navigation.TabItem
 import com.andreesperanca.feature_manager.navigation.tabList
 import com.andreesperanca.ui_components.components.texts.TitleMedium
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FinanceContent(modifier: Modifier = Modifier) {
 
@@ -121,10 +122,14 @@ fun FinanceContent(modifier: Modifier = Modifier) {
                         .align(Alignment.CenterEnd)
                         .padding(end = 8.dp)
                         .clickable {
-                            tabList.filter { it == TabItem.Finance }.first().apply {
-                                navController?.navigate(
-                                    "create_finance_screen")
-                            }
+                            tabList
+                                .filter { it == TabItem.Finance }
+                                .first()
+                                .apply {
+                                    navController?.navigate(
+                                        "create_finance_screen"
+                                    )
+                                }
 
                             tabList.indexOf(TabItem.Finance)
 //                            coroutineScope.launch {
@@ -159,7 +164,7 @@ fun FinanceContent(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun FinanceContentPreview() {
-    CamisaNoveTheme {
+    C9Theme {
         FinanceContent()
     }
 }

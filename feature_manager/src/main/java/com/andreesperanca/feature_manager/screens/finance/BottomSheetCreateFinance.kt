@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -37,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andreesperanca.ui_components.components.buttons.DefaultButton
 import com.andreesperanca.ui_components.components.radio_button.RadioButtonDefault
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -185,7 +184,7 @@ fun BottomSheetCreateFinance(
 @Preview(showBackground = true)
 @Composable
 fun BottomSheetCreateFinancePreview() {
-    CamisaNoveTheme() {
+    C9Theme() {
         BottomSheetCreateFinance(closeClick = {})
     }
 }

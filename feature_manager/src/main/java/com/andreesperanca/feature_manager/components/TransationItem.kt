@@ -17,7 +17,7 @@ import com.andreesperanca.feature_manager.models.Transaction
 import com.andreesperanca.ui_components.components.texts.DescriptionSubtitleMedium
 import com.andreesperanca.ui_components.components.texts.SubtitleMedium
 import com.andreesperanca.ui_components.components.texts.TitleMedium
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 
 @Composable
 fun TransactionItem(
@@ -56,7 +56,7 @@ fun TransactionItem(
 @Preview
 @Composable
 fun TransactionItemPreview() {
-    CamisaNoveTheme() {
+    C9Theme() {
         TransactionItem(
             transaction = translationsList.first()
         )

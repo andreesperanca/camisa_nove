@@ -30,7 +30,7 @@ import coil.request.ImageRequest
 import com.andreesperanca.feature_manager.R
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.TitleMedium
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -183,7 +183,7 @@ fun OverViewContent(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun OverViewContentPreview() {
-    CamisaNoveTheme {
+    C9Theme {
         OverViewContent()
     }
 }

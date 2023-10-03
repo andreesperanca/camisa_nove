@@ -14,18 +14,16 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andreesperanca.ui_components.components.texts.TitleMedium
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -118,7 +116,7 @@ fun RadioButtonDefault(
 @Preview(showBackground = true)
 @Composable
 fun RadioButtonDefaultPreview() {
-    CamisaNoveTheme {
+    C9Theme {
         RadioButtonDefault()
     }
 }

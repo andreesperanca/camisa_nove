@@ -20,7 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.feature_manager.navigation.TabLayout
 import com.andreesperanca.feature_manager.navigation.tabList
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -71,7 +71,7 @@ fun ManagerScreen(
 @Preview(showBackground = true)
 @Composable
 fun ManagerScreenPreview() {
-    CamisaNoveTheme {
+    C9Theme {
         val navController = rememberNavController()
         ManagerScreen(navController = navController)
     }

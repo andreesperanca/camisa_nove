@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreesperanca.feature_manager.data.playersList
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 
 
 @Composable
@@ -319,7 +319,7 @@ fun SegmentedControl(
 @Preview(showBackground = true)
 @Composable
 fun ConfirmationContentPreview() {
-    CamisaNoveTheme {
+    C9Theme {
         ConfirmationContent()
     }
 }

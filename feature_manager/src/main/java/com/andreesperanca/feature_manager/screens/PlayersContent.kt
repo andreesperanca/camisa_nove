@@ -56,7 +56,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreesperanca.feature_manager.R
-import com.andreesperanca.ui_components.theme.CamisaNoveTheme
+import com.andreesperanca.ui_components.theme.C9Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -230,7 +230,7 @@ fun PlayersContent() {
 @Preview(showBackground = true)
 @Composable
 fun PlayersContentPreview() {
-    CamisaNoveTheme() {
+    C9Theme() {
         PlayersContent()
     }
 }
