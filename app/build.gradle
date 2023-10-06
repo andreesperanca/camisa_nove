@@ -76,4 +76,5 @@ dependencies {
     //Modules
     implementation project(':ui_components')
     implementation project(':feature_manager')
+    implementation project(':feature_balanced_team')
 }

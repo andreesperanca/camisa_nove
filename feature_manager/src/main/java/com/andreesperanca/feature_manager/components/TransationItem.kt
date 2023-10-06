@@ -36,7 +36,8 @@ fun TransactionItem(
 
             SubtitleMedium(
                 modifier = Modifier.padding(start = 8.dp, top = 8.dp),
-                text = transaction.payer
+                text = transaction.payer,
+                color = Color.Gray
             )
 
             DescriptionSubtitleMedium(

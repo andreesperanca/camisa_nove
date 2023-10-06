@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.andreesperanca.camisanove.screen.MainScreen
+import com.andreesperanca.feature_balanced_team.screens.PlayersScreen
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,8 @@ class MainActivity : ComponentActivity() {
             C9Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    MainScreen()
+                    PlayersScreen()
+//                    MainScreen()
                 }
             }
         }

@@ -67,7 +67,7 @@ fun OverViewContent(modifier: Modifier = Modifier) {
             contentDescription = ""
         )
 
-        TitleMedium(
+         TitleMedium(
             modifier =
             Modifier
                 .fillMaxWidth()
