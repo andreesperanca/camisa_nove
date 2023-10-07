@@ -34,7 +34,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.andreesperanca.ui_components.components.buttons.DefaultButton
+import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.radio_button.RadioButtonDefault
 import com.andreesperanca.ui_components.theme.C9Theme
 import java.text.SimpleDateFormat
@@ -170,7 +170,7 @@ fun BottomSheetCreateFinance(
 
         RadioButtonDefault(modifier = Modifier.padding(bottom = 16.dp))
         
-        DefaultButton(
+        ButtonLarge(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(paddingValues = PaddingValues(16.dp)),

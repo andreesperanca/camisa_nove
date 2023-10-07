@@ -39,6 +39,7 @@ import com.example.compose.md_theme_dark_scrim
 import com.example.compose.md_theme_dark_secondary
 import com.example.compose.md_theme_dark_secondaryContainer
 import com.example.compose.md_theme_dark_surface
+import com.example.compose.md_theme_dark_surfaceContainer
 import com.example.compose.md_theme_dark_surfaceTint
 import com.example.compose.md_theme_dark_surfaceVariant
 import com.example.compose.md_theme_dark_tertiary
@@ -68,6 +69,7 @@ import com.example.compose.md_theme_light_scrim
 import com.example.compose.md_theme_light_secondary
 import com.example.compose.md_theme_light_secondaryContainer
 import com.example.compose.md_theme_light_surface
+import com.example.compose.md_theme_light_surfaceContainer
 import com.example.compose.md_theme_light_surfaceTint
 import com.example.compose.md_theme_light_surfaceVariant
 import com.example.compose.md_theme_light_tertiary
@@ -104,6 +106,7 @@ private val LightColorScheme = lightColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
+//    surfaceContainer = md_theme_light_surfaceContainer
 )
 
 
@@ -136,37 +139,39 @@ private val DarkColorScheme = darkColorScheme(
     inversePrimary = md_theme_dark_inversePrimary,
     surfaceTint = md_theme_dark_surfaceTint,
     outlineVariant = md_theme_dark_outlineVariant,
-    scrim = md_theme_dark_scrim
+    scrim = md_theme_dark_scrim,
+//    surfaceContainer = md_theme_dark_surfaceContainer
 )
 
 @Composable
 fun C9Theme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  // Dynamic color is available on Android 12+
-  dynamicColor: Boolean = true,
-  content: @Composable() () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
+    content: @Composable() () -> Unit
 ) {
-  val colorScheme = when {
-    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-        val context = LocalContext.current
-        if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+        }
     }
 
-    darkTheme -> DarkColorScheme
-    else -> LightColorScheme
-  }
-  val view = LocalView.current
-  if (!view.isInEditMode) {
-    SideEffect {
-        val window = (view.context as Activity).window
-        window.statusBarColor = colorScheme.primary.toArgb()
-        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-    }
-  }
-
-  MaterialTheme(
-      colorScheme = colorScheme,
-      typography = Typography,
-      content = content
-  )
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content,
+        shapes =  Shapes
+    )
 }

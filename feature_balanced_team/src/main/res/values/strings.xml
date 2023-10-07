@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="feature_balanced_players">"Jogadores [ %s ] "</string>
+    <string name="feature_balanced_team_balance_teams">Equilibrar equipes</string>
+    <string name="feature_balanced_team_back_button_description">Botão de voltar</string>
+    <string name="dividir_equipes">Gerar equipes</string>
+    <string name="generated_teams">Gerar Times</string>
+    <string name="settings">Configurações</string>
+    <string name="players_screen_description">Adicione jogadores e forme equipes equilibradas</string>
 </resources>
