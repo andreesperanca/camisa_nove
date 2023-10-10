@@ -7,4 +7,11 @@
     <string name="generated_teams">Gerar Times</string>
     <string name="settings">Configurações</string>
     <string name="players_screen_description">Adicione jogadores e forme equipes equilibradas</string>
+    <string name="feature_balanced_team_settings">Configurações</string>
+    <string name="feature_balanced_players_title">Jogadores</string>
+    <string name="feature_balanced_players_description">Quantidade de jogadores por time</string>
+    <string name="feature_balanced_teams_title">Times</string>
+    <string name="feature_balanced_teams_description">Quantidade de times a serem formados</string>
+    <string name="feature_balanced_use_levels_title">Utiizar níveis</string>
+    <string name="feature_balanced_use_levels_description">Divisão utilizará os níveis dos jogadores para dividir equipes\n</string>
 </resources>

@@ -49,7 +49,7 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
             modifier = modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(Color(0xFFFBF8FD))
+                .background(MaterialTheme.colorScheme.surface)
                 .align(Alignment.TopCenter)
         ) {
 
