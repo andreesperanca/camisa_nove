@@ -129,8 +129,7 @@ fun SettingsBalancedTeams(modifier: Modifier = Modifier) {
                             .fillMaxWidth()
                             .padding(
                                 start = dimensionResource(R.dimen.padding_medium),
-                                end = dimensionResource(R.dimen.padding_medium),
-                                top = dimensionResource(R.dimen.padding_small)
+                                end = dimensionResource(R.dimen.padding_medium)
                             ),
                         text = stringResource(R.string.feature_balanced_players_description)
                     )
@@ -175,8 +174,7 @@ fun SettingsBalancedTeams(modifier: Modifier = Modifier) {
                             .fillMaxWidth()
                             .padding(
                                 start = dimensionResource(R.dimen.padding_medium),
-                                end = dimensionResource(R.dimen.padding_medium),
-                                top = dimensionResource(R.dimen.padding_small)
+                                end = dimensionResource(R.dimen.padding_medium)
                             ),
                         text = stringResource(R.string.feature_balanced_teams_description)
                     )
