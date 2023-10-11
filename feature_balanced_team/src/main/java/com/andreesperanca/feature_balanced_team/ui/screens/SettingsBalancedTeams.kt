@@ -2,6 +2,8 @@ package com.andreesperanca.feature_balanced_team.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -17,6 +21,7 @@ import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RangeSlider
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
@@ -75,170 +80,171 @@ fun SettingsBalancedTeams(modifier: Modifier = Modifier) {
             .fillMaxSize()
     ) {
 
-        Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.surface)
-                .align(Alignment.TopCenter)
-        ) {
+        Scaffold(
+            topBar = {},
+            content = {
+                Column(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .background(MaterialTheme.colorScheme.surface)
+                        .align(Alignment.TopCenter)
+                        .padding(it)
+                        .verticalScroll(rememberScrollState())
+                ) {
 
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = md_theme_light_surfaceContainer
-                ),
-                title = {
-                    TitleMedium(text = stringResource(R.string.feature_balanced_team_settings))
-                },
-                navigationIcon = {
-                    Icon(
-                        modifier = Modifier.padding(PaddingValues(dimensionResource(id = R.dimen.padding_small))),
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        painter = painterResource(id = com.andreesperanca.ui_components.R.drawable.ic_back),
-                        contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
+                    TopAppBar(
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = md_theme_light_surfaceContainer
+                        ),
+                        title = {
+                            TitleMedium(text = stringResource(R.string.feature_balanced_team_settings))
+                        },
+                        navigationIcon = {
+                            Icon(
+                                modifier = Modifier.padding(PaddingValues(dimensionResource(id = R.dimen.padding_small))),
+                                tint = MaterialTheme.colorScheme.onSurface,
+                                painter = painterResource(id = com.andreesperanca.ui_components.R.drawable.ic_back),
+                                contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
+                            )
+                        }
+                    )
+
+                    TitleMedium(
+                        modifier = Modifier
+                            .padding(
+                                top = dimensionResource(id = R.dimen.padding_large),
+                                start = dimensionResource(
+                                    id = R.dimen.padding_medium
+                                )
+                            )
+                            .fillMaxWidth(),
+                        text = stringResource(
+                            id = R.string.feature_balanced_players_title
+                        )
+                    )
+
+                    DescriptionMedium(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = dimensionResource(R.dimen.padding_medium),
+                                end = dimensionResource(R.dimen.padding_medium),
+                                top = dimensionResource(R.dimen.padding_small)
+                            ),
+                        text = stringResource(R.string.feature_balanced_players_description)
+                    )
+
+                    HeaderLarge(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(id = R.dimen.padding_medium),
+                            start = dimensionResource(id = R.dimen.padding_medium)
+                        ),
+                        text = playersSliderPosition.toString()
+                    )
+
+                    Slider(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(id = R.dimen.padding_medium),
+                            start = dimensionResource(id = R.dimen.padding_medium),
+                            end = dimensionResource(id = R.dimen.padding_medium)
+                        ),
+                        value = playersSliderPosition,
+                        onValueChange = { playersSliderPosition = it },
+                        colors = SliderDefaults.colors(),
+                        steps = 5,
+                        valueRange = 0f..100f
+                    )
+
+                    TitleMedium(
+                        modifier = Modifier
+                            .padding(
+                                top = dimensionResource(id = R.dimen.padding_large),
+                                start = dimensionResource(
+                                    id = R.dimen.padding_medium
+                                )
+                            )
+                            .fillMaxWidth(),
+                        text = stringResource(
+                            id = R.string.feature_balanced_teams_title
+                        )
+                    )
+
+                    DescriptionMedium(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = dimensionResource(R.dimen.padding_medium),
+                                end = dimensionResource(R.dimen.padding_medium),
+                                top = dimensionResource(R.dimen.padding_small)
+                            ),
+                        text = stringResource(R.string.feature_balanced_teams_description)
+                    )
+
+                    HeaderLarge(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(id = R.dimen.padding_medium),
+                            start = dimensionResource(id = R.dimen.padding_medium)
+                        ),
+                        text = teamsSliderPosition.toString()
+                    )
+
+                    Slider(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(id = R.dimen.padding_medium),
+                            start = dimensionResource(id = R.dimen.padding_medium),
+                            end = dimensionResource(id = R.dimen.padding_medium)
+                        ),
+                        value = teamsSliderPosition,
+                        onValueChange = { teamsSliderPosition = it },
+                        colors = SliderDefaults.colors(),
+                        steps = 10,
+                        valueRange = 1f..10f
+                    )
+
+                    ListItem(
+                        modifier = Modifier.padding(
+                            top = dimensionResource(id = R.dimen.padding_medium),
+                            start = dimensionResource(id = R.dimen.padding_medium),
+                            end = dimensionResource(id = R.dimen.padding_medium),
+                            bottom = dimensionResource(id = R.dimen.padding_large)
+                        ),
+                        headlineContent = {
+                            TitleMedium(
+                                text = stringResource(id = R.string.feature_balanced_use_levels_title)
+                            )
+                        },
+                        supportingContent = {
+                            DescriptionMedium(text = stringResource(id = R.string.feature_balanced_use_levels_description))
+                        },
+                        trailingContent = {
+                            Checkbox(
+                                levelBalanced,
+                                onCheckedChange = {
+                                    levelBalanced = !levelBalanced
+                                })
+                        },
+                        colors = ListItemDefaults.colors(
+                            containerColor = md_theme_light_surfaceContainer
+                        )
                     )
                 }
-            )
-
-            TitleMedium(
-                modifier = Modifier
-                    .padding(
-                        top = dimensionResource(id = R.dimen.padding_large),
-                        start = dimensionResource(
-                            id = R.dimen.padding_medium
-                        )
-                    )
-                    .fillMaxWidth(),
-                text = stringResource(
-                    id = R.string.feature_balanced_players_title
-                )
-            )
-
-            DescriptionMedium(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_small)
-                    ),
-                text = stringResource(R.string.feature_balanced_players_description)
-            )
-
-            HeaderLarge(
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    start = dimensionResource(id = R.dimen.padding_medium)
-                ),
-                text = playersSliderPosition.toString()
-            )
-
-            Slider(
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    start = dimensionResource(id = R.dimen.padding_medium),
-                    end = dimensionResource(id = R.dimen.padding_medium)
-                ),
-                value = playersSliderPosition,
-                onValueChange = { playersSliderPosition =  it },
-                colors = SliderDefaults.colors(
-//                    thumbColor = MaterialTheme.colorScheme.secondary,
-//                    activeTrackColor = MaterialTheme.colorScheme.secondary,
-//                    inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-                ),
-                steps = 5,
-                valueRange =0f..100f
-            )
-
-            TitleMedium(
-                modifier = Modifier
-                    .padding(
-                        top = dimensionResource(id = R.dimen.padding_large),
-                        start = dimensionResource(
-                            id = R.dimen.padding_medium
-                        )
-                    )
-                    .fillMaxWidth(),
-                text = stringResource(
-                    id = R.string.feature_balanced_teams_title
-                )
-            )
-
-            DescriptionMedium(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_small)
-                    ),
-                text = stringResource(R.string.feature_balanced_teams_description)
-            )
-
-            HeaderLarge(
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    start = dimensionResource(id = R.dimen.padding_medium)
-                ),
-                text = teamsSliderPosition.toString()
-            )
-
-            Slider(
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    start = dimensionResource(id = R.dimen.padding_medium),
-                    end = dimensionResource(id = R.dimen.padding_medium)
-                ),
-                value = teamsSliderPosition,
-                onValueChange = { teamsSliderPosition = it },
-                colors = SliderDefaults.colors(
-//                    thumbColor = MaterialTheme.colorScheme.secondary,
-//                    activeTrackColor = MaterialTheme.colorScheme.secondary,
-//                    inactiveTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-                ),
-                steps = 10,
-                valueRange = 1f..10f
-            )
-
-                ListItem(
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    start = dimensionResource(id = R.dimen.padding_medium),
-                    end = dimensionResource(id = R.dimen.padding_medium)
-                ),
-                headlineContent = {
-                    TitleMedium(
-                        text = stringResource(id = R.string.feature_balanced_use_levels_title)
-                    )
-                },
-                supportingContent = {
-                    DescriptionMedium(text = stringResource(id = R.string.feature_balanced_use_levels_description))
-                },
-                trailingContent = {
-                    Checkbox(
-                        levelBalanced,
-                        onCheckedChange = {
-                            levelBalanced = !levelBalanced
-                        })
-                },
-                    colors = ListItemDefaults.colors(
-                        containerColor = md_theme_light_surfaceContainer
-                    )
-            )
-        }
-
-        ButtonLarge(
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .align(Alignment.BottomCenter),
-            onClickCta = {
 
             },
-            title = stringResource(id = R.string.generated_teams),
+            bottomBar = {
+                ButtonLarge(
+                    modifier = Modifier
+                        .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
+                        .align(Alignment.BottomCenter),
+                    onClickCta = {
+
+                    },
+                    title = stringResource(id = R.string.feature_balanced_apply),
+                )
+            }
+
         )
     }
-
-
 }
 
 @Preview

@@ -14,4 +14,5 @@
     <string name="feature_balanced_teams_description">Quantidade de times a serem formados</string>
     <string name="feature_balanced_use_levels_title">Utiizar níveis</string>
     <string name="feature_balanced_use_levels_description">Divisão utilizará os níveis dos jogadores para dividir equipes\n</string>
+    <string name="feature_balanced_apply">Aplicar</string>
 </resources>
