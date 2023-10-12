@@ -9,9 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.andreesperanca.camisanove.screen.MainScreen
-import com.andreesperanca.feature_balanced_team.ui.screens.PlayersScreen
-import com.andreesperanca.feature_balanced_team.ui.screens.SettingsBalancedTeams
+import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +21,7 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
 //                    PlayersScreen()
 //                    MainScreen()
-                    SettingsBalancedTeams()
+                    BalancedTeamsScreen()
                 }
             }
         }

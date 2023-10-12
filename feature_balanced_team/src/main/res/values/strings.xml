@@ -15,4 +15,16 @@
     <string name="feature_balanced_use_levels_title">Utiizar níveis</string>
     <string name="feature_balanced_use_levels_description">Divisão utilizará os níveis dos jogadores para dividir equipes\n</string>
     <string name="feature_balanced_apply">Aplicar</string>
+    <string name="feature_balanced_team_add_player">Adicionar jogador</string>
+    <string name="feature_balanced_add_player_title">Adicionar jogador</string>
+    <string name="feature_balanced_add_player_description">Adicione jogadores que não estão presentes  no grupo</string>
+    <string name="feature_balanced_name">Nome</string>
+    <string name="feature_balanced_insert_player_name">Insira o nome do jogador</string>
+    <string name="feature_balanced_level_title">Nível</string>
+    <string name="feature_balanced_level_description">Dê uma nota para esse jogador, essa nota será utilizada para criar equipes mais equilibradas</string>
+    <string name="feature_balanced_special_player_title">Jogador especial</string>
+    <string name="feature_balanced_special_player_description">Posição exclusiva em cada equipe, análoga à dos goleiros no futebol.</string>
+    <string name="feature_balanced_add_player">Adicionar</string>
+    <string name="feature_balanced_team_name">Time %s</string>
+    <string name="feature_balanced_team_description">Pontuação da equipe [ %s ]</string>
 </resources>

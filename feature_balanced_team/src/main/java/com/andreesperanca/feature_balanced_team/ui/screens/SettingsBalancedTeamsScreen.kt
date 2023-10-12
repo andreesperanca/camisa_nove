@@ -1,9 +1,6 @@
 package com.andreesperanca.feature_balanced_team.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,15 +14,12 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -40,7 +34,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
@@ -48,13 +41,10 @@ import com.andreesperanca.ui_components.components.texts.HeaderLarge
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.example.compose.md_theme_light_surfaceContainer
-import java.lang.Math.ceil
-import kotlin.math.absoluteValue
-import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsBalancedTeams(modifier: Modifier = Modifier) {
+fun SettingsBalancedTeamsScreen(modifier: Modifier = Modifier) {
 
 
     val playersSliderState = SliderState(
@@ -249,6 +239,6 @@ fun SettingsBalancedTeams(modifier: Modifier = Modifier) {
 @Composable
 fun SettingsBalancedTeamsPreview() {
     C9Theme {
-        SettingsBalancedTeams()
+        SettingsBalancedTeamsScreen()
     }
 }
