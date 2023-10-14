@@ -1,6 +1,5 @@
 package com.andreesperanca.camisanove.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,7 +17,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +30,7 @@ import com.andreesperanca.ui_components.theme.C9Theme
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-//    context: Context
+    navigateToBalancedTeamFeature: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -40,32 +38,38 @@ fun MainScreen(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color(0xFFEFEDF1)
                 ),
-                title = { Text(
-                    color = MaterialTheme.colorScheme.primary,
-                    text = stringResource(id = R.string.app_name)) },
+                title = {
+                    Text(
+                        color = MaterialTheme.colorScheme.primary,
+                        text = stringResource(id = R.string.app_name)
+                    )
+                },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier.padding(PaddingValues(8.dp)),
                         tint = Color(0xFF45464F),
                         painter = painterResource(id = R.drawable.ic_menu),
-                        contentDescription = stringResource(id = R.string.app_main_screen_menu))
-                    },
+                        contentDescription = stringResource(id = R.string.app_main_screen_menu)
+                    )
+                },
                 actions = {
                     Icon(
                         modifier = Modifier.padding(PaddingValues(8.dp)),
                         tint = Color(0xFF45464F),
                         painter = painterResource(id = R.drawable.ic_account),
-                    contentDescription = stringResource(id = R.string.app_main_screen_my_account))
+                        contentDescription = stringResource(id = R.string.app_main_screen_my_account)
+                    )
                 }
             )
         }
     ) {
-        Column(modifier =
-        Modifier
-            .padding(it)
-            .fillMaxWidth()
-            .fillMaxSize()
-            .background(Color(0xFFFBF8FD))
+        Column(
+            modifier =
+            Modifier
+                .padding(it)
+                .fillMaxWidth()
+                .fillMaxSize()
+                .background(Color(0xFFFBF8FD))
 
         ) {
             Spacer(modifier = Modifier.padding(top = 32.dp))
@@ -75,10 +79,11 @@ fun MainScreen(
                 title = "Times equilibrados",
                 description = "Times equilibrados",
                 ctaTitle = "Começar",
-                clickCta = {},
+                clickCta = {
+                    navigateToBalancedTeamFeature()
+                },
                 imageDescription = "Times equilibrados"
             )
-
 
 
         }
@@ -90,6 +95,6 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     C9Theme {
-        MainScreen()
+        MainScreen(navigateToBalancedTeamFeature = {})
     }
 }

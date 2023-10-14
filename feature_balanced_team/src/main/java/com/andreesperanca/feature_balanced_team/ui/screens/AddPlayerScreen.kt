@@ -1,6 +1,7 @@
 package com.andreesperanca.feature_balanced_team.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,7 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -36,6 +36,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
@@ -46,7 +48,10 @@ import com.example.compose.md_theme_light_surfaceContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddPlayerScreen(modifier: Modifier = Modifier) {
+fun AddPlayerScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
 
     var levelBalanced by remember { mutableStateOf(true) }
 
@@ -70,7 +75,11 @@ fun AddPlayerScreen(modifier: Modifier = Modifier) {
                     },
                     navigationIcon = {
                         Icon(
-                            modifier = Modifier.padding(PaddingValues(dimensionResource(id = R.dimen.padding_small))),
+                            modifier = Modifier
+                                .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small)))
+                                .clickable { navController.popBackStack() }
+
+                            ,
                             tint = MaterialTheme.colorScheme.onSurface,
                             painter = painterResource(id = com.andreesperanca.ui_components.R.drawable.ic_back),
                             contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
@@ -239,6 +248,6 @@ fun AddPlayerScreen(modifier: Modifier = Modifier) {
 @Composable
 fun AddPlayerScreenPreview() {
     C9Theme {
-        AddPlayerScreen()
+        AddPlayerScreen(navController = rememberNavController())
     }
 }

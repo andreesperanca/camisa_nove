@@ -9,7 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
+import androidx.navigation.compose.rememberNavController
+import com.andreesperanca.camisanove.navigation.RootNavigationGraph
+import com.andreesperanca.camisanove.screen.MainScreen
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -17,11 +19,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             C9Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-//                    PlayersScreen()
-//                    MainScreen()
-                    BalancedTeamsScreen()
+                    val navController = rememberNavController()
+                    RootNavigationGraph(navController)
                 }
             }
         }
@@ -32,6 +32,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreenPreview() {
     C9Theme {
-
+        MainScreen(navigateToBalancedTeamFeature = {})
     }
 }

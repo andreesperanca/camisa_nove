@@ -1,6 +1,7 @@
 package com.andreesperanca.feature_balanced_team.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,6 +26,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.feature_balanced_team.data.playerList
 import com.andreesperanca.feature_balanced_team.ui.components.PlayerItem
@@ -38,7 +41,14 @@ import com.example.compose.md_theme_light_surfaceContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlayersScreen(modifier: Modifier = Modifier) {
+fun PlayersScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    navigateToSettingsScreen: () -> Unit,
+    navigateToAddPlayersScreen: () -> Unit,
+    navigateToTeamsBalancedScreen: () -> Unit,
+    navigateToBackStack: () -> Unit,
+) {
 
     Box(
         modifier = Modifier
@@ -62,7 +72,11 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     Icon(
-                        modifier = Modifier.padding(PaddingValues(8.dp)),
+                        modifier = Modifier
+                            .padding(PaddingValues(8.dp))
+                            .clickable {
+                                navigateToBackStack()
+                            },
                         tint = MaterialTheme.colorScheme.onSurface,
                         painter = painterResource(id = drawable.ic_back),
                         contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
@@ -77,7 +91,9 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
                         start = dimensionResource(id = R.dimen.padding_medium),
                         top = dimensionResource(id = R.dimen.padding_large)
                     ),
-                onClickCta = {},
+                onClickCta = {
+                    navigateToSettingsScreen()
+                },
             )
 
 
@@ -103,7 +119,11 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
                     )
                     Icon(
                         modifier = Modifier
-                            .align(Alignment.CenterEnd),
+                            .align(Alignment.CenterEnd)
+                            .clickable {
+                                navigateToAddPlayersScreen()
+                            }
+                        ,
                         painter = painterResource(id = drawable.ic_add),
                         contentDescription = ""
                     )
@@ -136,9 +156,7 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .align(Alignment.BottomCenter),
-            onClickCta = {
-
-            },
+            onClickCta = { navigateToTeamsBalancedScreen() },
             title = stringResource(id = R.string.generated_teams),
         )
     }
@@ -148,6 +166,13 @@ fun PlayersScreen(modifier: Modifier = Modifier) {
 @Composable
 fun PlayersScreenPreview() {
     C9Theme {
-        PlayersScreen()
+        val navController = rememberNavController()
+        PlayersScreen(
+            navController = navController,
+            navigateToAddPlayersScreen = {},
+            navigateToSettingsScreen = {},
+            navigateToTeamsBalancedScreen = {},
+            navigateToBackStack = {}
+        )
     }
 }
