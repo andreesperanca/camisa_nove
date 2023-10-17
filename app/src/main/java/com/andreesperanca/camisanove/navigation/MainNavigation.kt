@@ -11,10 +11,12 @@ import com.andreesperanca.feature_balanced_team.ui.screens.AddPlayerScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.PlayersScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.SettingsBalancedTeamsScreen
+import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 
 @Composable
 fun RootNavigationGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: AddPlayersViewModel
 ) {
     NavHost(
         navController = navController,
@@ -27,11 +29,14 @@ fun RootNavigationGraph(
                 navigateToBalancedTeamFeature = { navController.navigate(AppGraph.teams_balanced.ROOT) }
             )
         }
-        teamsBalancedFeatureGraph(navController)
+        teamsBalancedFeatureGraph(navController, viewModel)
     }
 }
 
-fun NavGraphBuilder.teamsBalancedFeatureGraph(navController: NavHostController) {
+fun NavGraphBuilder.teamsBalancedFeatureGraph(
+    navController: NavHostController,
+    viewModel: AddPlayersViewModel
+    ) {
     navigation(
         route = AppGraph.teams_balanced.ROOT,
         startDestination = AppGraph.teams_balanced.PLAYERS
@@ -46,7 +51,10 @@ fun NavGraphBuilder.teamsBalancedFeatureGraph(navController: NavHostController) 
             )
         }
         composable(route = AppGraph.teams_balanced.ADD_PLAYER) {
-            AddPlayerScreen(navController = navController)
+            AddPlayerScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
         composable(route = AppGraph.teams_balanced.SETTINGS) {
             SettingsBalancedTeamsScreen(navController = navController)

@@ -37,8 +37,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.andreesperanca.database.model.Player
 import com.andreesperanca.feature_balanced_team.R
+import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.HeaderLarge
@@ -50,9 +51,9 @@ import com.example.compose.md_theme_light_surfaceContainer
 @Composable
 fun AddPlayerScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    viewModel: AddPlayersViewModel
 ) {
-
     var levelBalanced by remember { mutableStateOf(true) }
 
     var nameEditText by remember { mutableStateOf("") }
@@ -234,7 +235,12 @@ fun AddPlayerScreen(
                         .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
                         .align(Alignment.BottomCenter),
                     onClickCta = {
-
+                        val newPlayer = Player(
+                            uid = 1,
+                            name = "",
+                            level = 5f
+                        )
+                        viewModel.addPlayer(newPlayer)
                     },
                     title = stringResource(id = R.string.feature_balanced_add_player),
                 )
@@ -248,6 +254,13 @@ fun AddPlayerScreen(
 @Composable
 fun AddPlayerScreenPreview() {
     C9Theme {
-        AddPlayerScreen(navController = rememberNavController())
+//        AddPlayerScreen(
+//            navController = rememberNavController(),
+//            modifier = Modifier,
+//            viewModel =
+//            AddPlayersViewModel(
+//                repository = AddPlayerRepositoryImpl(database = PlayersDa))
+//
+//        )
     }
 }

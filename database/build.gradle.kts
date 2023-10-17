@@ -1,11 +1,12 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
-    namespace = "com.andreesperanca.feature_balanced_team"
-    compileSdk = 34
+    namespace = "com.andreesperanca.database"
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
@@ -30,11 +31,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures {
-        compose = true
-    }
-
 }
 
 dependencies {
@@ -42,22 +38,15 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("androidx.compose:compose-bom:2022.10.00")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha02")
-    implementation(project(":ui_components"))
-    implementation(project(":database"))
-    implementation("androidx.activity:activity-compose:1.7.2")
-
-    val nav_version = "2.5.3"
-
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    //ROOM DATABASE
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    kapt("androidx.room:room-ktx:2.5.0")
+//    kapt("androidx.lifecycle:lifecycle-compiler:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    api("androidx.room:room-ktx:2.5.0")
 }

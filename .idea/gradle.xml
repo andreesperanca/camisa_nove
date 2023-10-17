@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/feature_balanced_team" />
             <option value="$PROJECT_DIR$/feature_manager" />
             <option value="$PROJECT_DIR$/ui_components" />

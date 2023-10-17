@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.camisanove.navigation.RootNavigationGraph
 import com.andreesperanca.camisanove.screen.MainScreen
+import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +22,14 @@ class MainActivity : ComponentActivity() {
             C9Theme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
-                    RootNavigationGraph(navController)
+
+                    val viewModel =
+                        AddPlayersViewModel(
+                            repository =
+                            AppDataContainer(this)
+                                .addPlayersRepository)
+
+                    RootNavigationGraph(navController, viewModel)
                 }
             }
         }
