@@ -3,6 +3,7 @@ package com.andreesperanca.database.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.andreesperanca.database.model.Player
 
@@ -14,7 +15,7 @@ interface PlayerDao {
     @Query("SELECT * FROM players WHERE uid IN (:playersIds)")
     suspend fun loadAllByIds(playersIds: IntArray): List<Player>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlayer(player: Player)
 
     @Delete

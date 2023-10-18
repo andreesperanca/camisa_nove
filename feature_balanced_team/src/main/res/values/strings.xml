@@ -27,4 +27,6 @@
     <string name="feature_balanced_add_player">Adicionar</string>
     <string name="feature_balanced_team_name">Time %s</string>
     <string name="feature_balanced_team_description">Pontuação da equipe [ %s ]</string>
+    <string name="teams_balanced_add_players_screen_add_player_message">Jogador %s Adicionado</string>
+    <string name="feature_balanced_add_player_invalid_name">Nome deve conter entre 1 e 25 caracteres.</string>
 </resources>

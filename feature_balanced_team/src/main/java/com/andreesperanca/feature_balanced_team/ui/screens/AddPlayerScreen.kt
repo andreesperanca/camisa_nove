@@ -21,17 +21,24 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.andreesperanca.database.model.Player
 import com.andreesperanca.feature_balanced_team.R
+import com.andreesperanca.feature_balanced_team.utils.isValidName
 import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
@@ -46,6 +54,7 @@ import com.andreesperanca.ui_components.components.texts.HeaderLarge
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.example.compose.md_theme_light_surfaceContainer
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,17 +63,27 @@ fun AddPlayerScreen(
     navController: NavController,
     viewModel: AddPlayersViewModel
 ) {
-    var levelBalanced by remember { mutableStateOf(true) }
+    var specialPlayer by remember { mutableStateOf(false) }
 
     var nameEditText by remember { mutableStateOf("") }
 
     var levelSlider by remember { mutableFloatStateOf(0.5f) }
+    val levelFormat = String.format("%.1f", levelSlider)
+
+    var playerNameIsInvalid by rememberSaveable { mutableStateOf(false) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    val context = LocalContext.current
+
+    var uiEvent = viewModel._event.observeAsState()
+
+    val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -77,9 +96,8 @@ fun AddPlayerScreen(
                     navigationIcon = {
                         Icon(
                             modifier = Modifier
-                                .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small)))
                                 .clickable { navController.popBackStack() }
-
+                                .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small)))
                             ,
                             tint = MaterialTheme.colorScheme.onSurface,
                             painter = painterResource(id = com.andreesperanca.ui_components.R.drawable.ic_back),
@@ -148,12 +166,25 @@ fun AddPlayerScreen(
                         label = {
                             Text(
                                 style = MaterialTheme.typography.bodySmall,
-                                text = stringResource(id = R.string.feature_balanced_insert_player_name))
-                                },
+                                text = stringResource(id = R.string.feature_balanced_insert_player_name)
+                            )
+                        },
                         value = nameEditText,
                         onValueChange = { string ->
                             nameEditText = string
-                        })
+                            playerNameIsInvalid = false
+                        },
+                        isError = playerNameIsInvalid,
+                        supportingText = {
+                            if (playerNameIsInvalid) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = stringResource(id = R.string.feature_balanced_add_player_invalid_name),
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        }
+                    )
 
                     TitleMedium(
                         modifier = Modifier
@@ -184,7 +215,7 @@ fun AddPlayerScreen(
                             top = dimensionResource(id = R.dimen.padding_medium),
                             start = dimensionResource(id = R.dimen.padding_medium)
                         ),
-                        text = levelSlider.toString()
+                        text = levelFormat
                     )
 
                     Slider(
@@ -196,8 +227,7 @@ fun AddPlayerScreen(
                         value = levelSlider,
                         onValueChange = { levelSlider = it },
                         colors = SliderDefaults.colors(),
-                        steps = 10,
-                        valueRange = 0.5f..10f
+                        valueRange = 0.5f..5f
                     )
 
                     ListItem(
@@ -217,35 +247,45 @@ fun AddPlayerScreen(
                         },
                         trailingContent = {
                             Checkbox(
-                                levelBalanced,
+                                specialPlayer,
                                 onCheckedChange = {
-                                    levelBalanced = !levelBalanced
+                                    specialPlayer = !specialPlayer
                                 })
                         },
-                        colors = ListItemDefaults.colors(
-                            containerColor = md_theme_light_surfaceContainer
-                        )
+                        colors = ListItemDefaults.colors(containerColor = md_theme_light_surfaceContainer)
                     )
                 }
-
             },
+
+
             bottomBar = {
                 ButtonLarge(
                     modifier = Modifier
                         .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
                         .align(Alignment.BottomCenter),
                     onClickCta = {
-                        val newPlayer = Player(
-                            uid = 1,
-                            name = "",
-                            level = 5f
-                        )
-                        viewModel.addPlayer(newPlayer)
+                        if (nameEditText.isValidName()) {
+                            val newPlayer = Player(name = nameEditText, level = levelSlider)
+                            viewModel.addPlayer(newPlayer)
+                            nameEditText = ""
+                            specialPlayer = false
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = context.getString(R.string.teams_balanced_add_players_screen_add_player_message, newPlayer.name),
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
+                        } else {
+                            playerNameIsInvalid = true
+                        }
                     },
                     title = stringResource(id = R.string.feature_balanced_add_player),
                 )
-            }
+            },
 
+            snackbarHost = {
+                SnackbarHost(hostState = snackbarHostState)
+            }
         )
     }
 }
@@ -254,13 +294,6 @@ fun AddPlayerScreen(
 @Composable
 fun AddPlayerScreenPreview() {
     C9Theme {
-//        AddPlayerScreen(
-//            navController = rememberNavController(),
-//            modifier = Modifier,
-//            viewModel =
-//            AddPlayersViewModel(
-//                repository = AddPlayerRepositoryImpl(database = PlayersDa))
-//
-//        )
+
     }
 }
