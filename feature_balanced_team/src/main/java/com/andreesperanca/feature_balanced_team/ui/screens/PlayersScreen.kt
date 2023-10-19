@@ -1,5 +1,10 @@
 package com.andreesperanca.feature_balanced_team.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -27,11 +32,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.feature_balanced_team.R
-import com.andreesperanca.feature_balanced_team.data.playerList
 import com.andreesperanca.feature_balanced_team.ui.components.PlayerItem
-import com.andreesperanca.ui_components.R.*
+import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
+import com.andreesperanca.ui_components.R.drawable
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.buttons.ButtonMedium
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
@@ -39,21 +43,24 @@ import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.example.compose.md_theme_light_surfaceContainer
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PlayersScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
+    viewModel: PlayersViewModel,
     navigateToSettingsScreen: () -> Unit,
     navigateToAddPlayersScreen: () -> Unit,
     navigateToTeamsBalancedScreen: () -> Unit,
     navigateToBackStack: () -> Unit,
 ) {
 
+    viewModel.init()
+
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+        modifier = Modifier.fillMaxSize()
+    )
+    {
 
         Column(
             modifier = modifier
@@ -73,10 +80,8 @@ fun PlayersScreen(
                 navigationIcon = {
                     Icon(
                         modifier = Modifier
-                            .padding(PaddingValues(8.dp))
-                            .clickable {
-                                navigateToBackStack()
-                            },
+                            .clickable { navigateToBackStack() }
+                            .padding(PaddingValues(8.dp)),
                         tint = MaterialTheme.colorScheme.onSurface,
                         painter = painterResource(id = drawable.ic_back),
                         contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
@@ -114,16 +119,14 @@ fun PlayersScreen(
                             .fillMaxWidth(),
                         text = stringResource(
                             id = R.string.feature_balanced_players,
-                            playerList.size.toString()
+                            viewModel.playersUiState.value.playersList.size.toString()
                         )
                     )
                     Icon(
                         modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .clickable {
-                                navigateToAddPlayersScreen()
-                            }
-                        ,
+                            .clickable { navigateToAddPlayersScreen() }
+                            .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small)))
+                            .align(Alignment.CenterEnd),
                         painter = painterResource(id = drawable.ic_add),
                         contentDescription = ""
                     )
@@ -143,13 +146,19 @@ fun PlayersScreen(
 
             LazyColumn(
                 modifier = Modifier
+                    .padding(bottom = 100.dp)
                     .background(Color(0xFFEFEDF1))
             ) {
-                items(playerList) {
-                    PlayerItem(player = it)
+                items(viewModel.playersUiState.value.playersList, key = { it.name }) { player ->
+                    PlayerItem(
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = TweenSpec(200, 200, FastOutLinearInEasing)
+                        ),
+                        player = player,
+                        deletePlayerAction = { viewModel.deletePlayer(player) },
+                    )
                 }
             }
-
         }
 
         ButtonLarge(
@@ -166,13 +175,14 @@ fun PlayersScreen(
 @Composable
 fun PlayersScreenPreview() {
     C9Theme {
-        val navController = rememberNavController()
-        PlayersScreen(
-            navController = navController,
-            navigateToAddPlayersScreen = {},
-            navigateToSettingsScreen = {},
-            navigateToTeamsBalancedScreen = {},
-            navigateToBackStack = {}
-        )
+//        val navController = rememberNavController()
+//        PlayersScreen(
+//            navController = navController,
+//            viewModel = PlayersViewModel(),
+//            navigateToAddPlayersScreen = {},
+//            navigateToSettingsScreen = {},
+//            navigateToTeamsBalancedScreen = {},
+//            navigateToBackStack = {}
+//        )
     }
 }

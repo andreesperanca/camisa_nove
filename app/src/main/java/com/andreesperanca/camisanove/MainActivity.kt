@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.camisanove.navigation.RootNavigationGraph
 import com.andreesperanca.camisanove.screen.MainScreen
 import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
+import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -23,13 +24,15 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
 
-                    val viewModel =
-                        AddPlayersViewModel(
-                            repository =
-                            AppDataContainer(this)
-                                .addPlayersRepository)
+                    val addPlayersViewModel = AddPlayersViewModel(repository = AppDataContainer(this).addPlayersRepository)
+                    val playersViewModel = PlayersViewModel(repository = AppDataContainer(this).playersRepository)
 
-                    RootNavigationGraph(navController, viewModel)
+
+                    RootNavigationGraph(
+                        navController,
+                        addPlayersViewModel = addPlayersViewModel,
+                        playersViewModel = playersViewModel
+                    )
                 }
             }
         }

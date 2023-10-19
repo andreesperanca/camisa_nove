@@ -18,18 +18,28 @@ package com.andreesperanca.camisanove
 
 import android.content.Context
 import com.andreesperanca.database.database.AppDatabase
+import com.andreesperanca.database.model.Player
 import com.andreesperanca.feature_balanced_team.repository.AddPlayerRepository
 import com.andreesperanca.feature_balanced_team.repository.AddPlayerRepositoryImpl
+import com.andreesperanca.feature_balanced_team.repository.PlayersRepository
+import com.andreesperanca.feature_balanced_team.repository.PlayersRepositoryImpl
 
 /**
  * App container for Dependency injection.
  */
 interface AppContainer {
     val addPlayersRepository: AddPlayerRepository
+    val playersRepository: PlayersRepository
 }
 
 class AppDataContainer(private val context: Context) : AppContainer {
+
+    val database = AppDatabase.getDatabase(context).playersDao()
+
     override val addPlayersRepository: AddPlayerRepository by lazy {
-        AddPlayerRepositoryImpl(AppDatabase.getDatabase(context).playersDao())
+        AddPlayerRepositoryImpl(database)
+    }
+    override val playersRepository: PlayersRepository by lazy {
+        PlayersRepositoryImpl(database)
     }
 }

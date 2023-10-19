@@ -12,11 +12,13 @@ import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.PlayersScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.SettingsBalancedTeamsScreen
 import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
+import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
 
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController,
-    viewModel: AddPlayersViewModel
+    addPlayersViewModel: AddPlayersViewModel,
+    playersViewModel: PlayersViewModel
 ) {
     NavHost(
         navController = navController,
@@ -29,13 +31,18 @@ fun RootNavigationGraph(
                 navigateToBalancedTeamFeature = { navController.navigate(AppGraph.teams_balanced.ROOT) }
             )
         }
-        teamsBalancedFeatureGraph(navController, viewModel)
+        teamsBalancedFeatureGraph(
+            navController,
+            addPlayersViewModel,
+            playersViewModel
+        )
     }
 }
 
 fun NavGraphBuilder.teamsBalancedFeatureGraph(
     navController: NavHostController,
-    viewModel: AddPlayersViewModel
+    addPlayersViewModel: AddPlayersViewModel,
+    playersViewModel: PlayersViewModel
     ) {
     navigation(
         route = AppGraph.teams_balanced.ROOT,
@@ -44,6 +51,7 @@ fun NavGraphBuilder.teamsBalancedFeatureGraph(
         composable(route = AppGraph.teams_balanced.PLAYERS) {
             PlayersScreen(
                 navController = navController,
+                viewModel = playersViewModel,
                 navigateToTeamsBalancedScreen = { navController.navigate(AppGraph.teams_balanced.BALANCED_TEAMS) },
                 navigateToSettingsScreen = { navController.navigate(AppGraph.teams_balanced.SETTINGS) },
                 navigateToAddPlayersScreen = { navController.navigate(AppGraph.teams_balanced.ADD_PLAYER) },
@@ -53,7 +61,7 @@ fun NavGraphBuilder.teamsBalancedFeatureGraph(
         composable(route = AppGraph.teams_balanced.ADD_PLAYER) {
             AddPlayerScreen(
                 navController = navController,
-                viewModel = viewModel
+                viewModel = addPlayersViewModel
             )
         }
         composable(route = AppGraph.teams_balanced.SETTINGS) {
