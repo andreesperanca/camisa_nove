@@ -14,6 +14,7 @@ import com.andreesperanca.camisanove.navigation.RootNavigationGraph
 import com.andreesperanca.camisanove.screen.MainScreen
 import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
+import com.andreesperanca.feature_balanced_team.viewmodels.SettingsBalancedTeamsViewModel
 import com.andreesperanca.ui_components.theme.C9Theme
 
 class MainActivity : ComponentActivity() {
@@ -23,15 +24,18 @@ class MainActivity : ComponentActivity() {
             C9Theme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
+                    val container = AppDataContainer(this)
 
-                    val addPlayersViewModel = AddPlayersViewModel(repository = AppDataContainer(this).addPlayersRepository)
-                    val playersViewModel = PlayersViewModel(repository = AppDataContainer(this).playersRepository)
 
+                    val addPlayersViewModel = AddPlayersViewModel(repository = container.addPlayersRepository)
+                    val playersViewModel = PlayersViewModel(repository = container.playersRepository)
+                    val settingsBalancedTeamsViewModel = SettingsBalancedTeamsViewModel(container.settingsBalancedTeamsRepository)
 
                     RootNavigationGraph(
                         navController,
                         addPlayersViewModel = addPlayersViewModel,
-                        playersViewModel = playersViewModel
+                        playersViewModel = playersViewModel,
+                        settingsBalancedTeamsViewModel
                     )
                 }
             }

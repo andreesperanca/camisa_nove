@@ -76,8 +76,6 @@ fun AddPlayerScreen(
 
     val context = LocalContext.current
 
-    var uiEvent = viewModel._event.observeAsState()
-
     val scope = rememberCoroutineScope()
 
     Box(

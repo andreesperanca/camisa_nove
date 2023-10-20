@@ -23,8 +23,12 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,26 +40,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.andreesperanca.database.model.Settings
 import com.andreesperanca.feature_balanced_team.R
+import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeamsRepository
+import com.andreesperanca.feature_balanced_team.viewmodels.SettingsBalancedTeamsViewModel
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.HeaderLarge
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.example.compose.md_theme_light_surfaceContainer
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsBalancedTeamsScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    viewModel: SettingsBalancedTeamsViewModel
 ) {
 
     var levelBalanced by remember { mutableStateOf(true) }
 
-    var playersSliderPosition by remember { mutableFloatStateOf(1f) }
+    val uiState = viewModel.playersUiState.collectAsState().value
+    var playersSliderPosition by remember { mutableIntStateOf(uiState.settings.quantityPlayer) }
+    var teamsSliderPosition by remember { mutableIntStateOf(uiState.settings.quantityTeams) }
 
-    var teamsSliderPosition by remember { mutableFloatStateOf(0.5f) }
+    LaunchedEffect(uiState.settings) {
+        viewModel.init()
+    }
+
 
     Box(
         modifier = Modifier
@@ -64,6 +78,7 @@ fun SettingsBalancedTeamsScreen(
 
         Scaffold(
             topBar = {},
+
             content = {
                 Column(
                     modifier = modifier
@@ -85,9 +100,8 @@ fun SettingsBalancedTeamsScreen(
                         navigationIcon = {
                             Icon(
                                 modifier = Modifier
-                                    .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small)))
                                     .clickable { navController.popBackStack() }
-                                ,
+                                    .padding(PaddingValues(dimensionResource(id = R.dimen.padding_small))),
                                 tint = MaterialTheme.colorScheme.onSurface,
                                 painter = painterResource(id = com.andreesperanca.ui_components.R.drawable.ic_back),
                                 contentDescription = stringResource(R.string.feature_balanced_team_back_button_description)
@@ -133,11 +147,12 @@ fun SettingsBalancedTeamsScreen(
                             start = dimensionResource(id = R.dimen.padding_medium),
                             end = dimensionResource(id = R.dimen.padding_medium)
                         ),
-                        value = playersSliderPosition,
-                        onValueChange = { playersSliderPosition = it },
+                        value = playersSliderPosition.toFloat(),
+                        onValueChange = { newValue ->
+                            playersSliderPosition = newValue.roundToInt()
+                        },
                         colors = SliderDefaults.colors(),
-                        steps = 5,
-                        valueRange = 0f..100f
+                        valueRange = 1f..10f
                     )
 
                     TitleMedium(
@@ -178,12 +193,14 @@ fun SettingsBalancedTeamsScreen(
                             start = dimensionResource(id = R.dimen.padding_medium),
                             end = dimensionResource(id = R.dimen.padding_medium)
                         ),
-                        value = teamsSliderPosition,
-                        onValueChange = { teamsSliderPosition = it },
+                        value = teamsSliderPosition.toFloat(),
+                        onValueChange = { newValue ->
+                            teamsSliderPosition = newValue.roundToInt()
+                        },
                         colors = SliderDefaults.colors(),
-                        steps = 10,
                         valueRange = 1f..10f
                     )
+
 
                     ListItem(
                         modifier = Modifier.padding(
@@ -220,7 +237,13 @@ fun SettingsBalancedTeamsScreen(
                         .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
                         .align(Alignment.BottomCenter),
                     onClickCta = {
-
+                        val newSettings = Settings(
+                            quantityTeams = teamsSliderPosition,
+                            quantityPlayer = playersSliderPosition,
+                            useLevels = levelBalanced
+                        )
+                        viewModel.saveSettings(newSettings)
+                        navController.popBackStack()
                     },
                     title = stringResource(id = R.string.feature_balanced_apply),
                 )
@@ -233,7 +256,8 @@ fun SettingsBalancedTeamsScreen(
 @Preview
 @Composable
 fun SettingsBalancedTeamsPreview() {
+
     C9Theme {
-        SettingsBalancedTeamsScreen(navController = rememberNavController())
+
     }
 }

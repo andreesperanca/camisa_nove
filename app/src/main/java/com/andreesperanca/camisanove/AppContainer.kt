@@ -23,6 +23,8 @@ import com.andreesperanca.feature_balanced_team.repository.AddPlayerRepository
 import com.andreesperanca.feature_balanced_team.repository.AddPlayerRepositoryImpl
 import com.andreesperanca.feature_balanced_team.repository.PlayersRepository
 import com.andreesperanca.feature_balanced_team.repository.PlayersRepositoryImpl
+import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeamsRepository
+import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeamsRepositoryImpl
 
 /**
  * App container for Dependency injection.
@@ -30,16 +32,21 @@ import com.andreesperanca.feature_balanced_team.repository.PlayersRepositoryImpl
 interface AppContainer {
     val addPlayersRepository: AddPlayerRepository
     val playersRepository: PlayersRepository
+    val settingsBalancedTeamsRepository: SettingsBalancedTeamsRepository
 }
 
 class AppDataContainer(private val context: Context) : AppContainer {
 
-    val database = AppDatabase.getDatabase(context).playersDao()
+    private val playersDatabase = AppDatabase.getDatabase(context).playersDao()
+    private val settingsDatabase = AppDatabase.getDatabase(context).settingsDao()
 
     override val addPlayersRepository: AddPlayerRepository by lazy {
-        AddPlayerRepositoryImpl(database)
+        AddPlayerRepositoryImpl(playersDatabase)
     }
     override val playersRepository: PlayersRepository by lazy {
-        PlayersRepositoryImpl(database)
+        PlayersRepositoryImpl(playersDatabase)
+    }
+    override val settingsBalancedTeamsRepository: SettingsBalancedTeamsRepository by lazy {
+        SettingsBalancedTeamsRepositoryImpl(settingsDatabase)
     }
 }

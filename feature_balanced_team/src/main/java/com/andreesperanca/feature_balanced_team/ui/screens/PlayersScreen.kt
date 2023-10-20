@@ -149,7 +149,7 @@ fun PlayersScreen(
                     .padding(bottom = 100.dp)
                     .background(Color(0xFFEFEDF1))
             ) {
-                items(viewModel.playersUiState.value.playersList, key = { it.name }) { player ->
+                items(viewModel.playersUiState.value.playersList, key = { it.uid }) { player ->
                     PlayerItem(
                         modifier = Modifier.animateItemPlacement(
                             animationSpec = TweenSpec(200, 200, FastOutLinearInEasing)
