@@ -68,7 +68,7 @@ fun PlayerItem(
 @Preview
 @Composable
 fun PlayerItemPreview() {
-    val player = Player(0, "André", 0f)
+    val player = Player(0, "André", 0f, false)
     C9Theme {
         PlayerItem(player = player, deletePlayerAction = {})
     }

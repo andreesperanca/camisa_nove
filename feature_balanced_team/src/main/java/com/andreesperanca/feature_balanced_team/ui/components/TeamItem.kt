@@ -3,8 +3,6 @@ package com.andreesperanca.feature_balanced_team.ui.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.feature_balanced_team.data.mockTeamList
-import com.andreesperanca.feature_balanced_team.model.Team
+import com.andreesperanca.database.model.Team
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme

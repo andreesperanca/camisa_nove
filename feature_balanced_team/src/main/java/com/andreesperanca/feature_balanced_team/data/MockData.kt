@@ -1,31 +1,15 @@
 package com.andreesperanca.feature_balanced_team.data
 
 import com.andreesperanca.feature_balanced_team.model.Player
-import com.andreesperanca.feature_balanced_team.model.Team
+import com.andreesperanca.database.model.Team
 
 val playerList = listOf(
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-    Player("Andre"),
-
+    com.andreesperanca.database.model.Player(uid = 0,"Andre", level = 0F, isSpecialPLayer = false)
     )
 
-val mockTeamList = listOf(
-    Team("Andre", playerList.subList(0,3)),
-    Team("Andre",playerList.subList(0,3)),
-    Team("Andre",playerList.subList(0,3)),
-    Team("Andre",playerList.subList(0,3)),
+val mockTeamList = mutableListOf<Team>(
+   Team(
+       "",
+       playerList as MutableList
+   )
 )

@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class Player(
     @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "level") val level: Float
+    @ColumnInfo(name = "level") val level: Float,
+    @ColumnInfo(name = "special") val isSpecialPLayer: Boolean
 )

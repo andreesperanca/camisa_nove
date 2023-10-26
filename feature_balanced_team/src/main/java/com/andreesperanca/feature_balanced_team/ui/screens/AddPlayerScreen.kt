@@ -263,7 +263,7 @@ fun AddPlayerScreen(
                         .align(Alignment.BottomCenter),
                     onClickCta = {
                         if (nameEditText.isValidName()) {
-                            val newPlayer = Player(name = nameEditText, level = levelSlider)
+                            val newPlayer = Player(name = nameEditText, level = levelSlider, isSpecialPLayer = specialPlayer)
                             viewModel.addPlayer(newPlayer)
                             nameEditText = ""
                             specialPlayer = false

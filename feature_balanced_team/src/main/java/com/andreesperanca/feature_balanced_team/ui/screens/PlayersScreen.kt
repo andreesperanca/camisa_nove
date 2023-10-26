@@ -165,7 +165,10 @@ fun PlayersScreen(
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .align(Alignment.BottomCenter),
-            onClickCta = { navigateToTeamsBalancedScreen() },
+            onClickCta = {
+                viewModel.balancedTeams()
+//                navigateToTeamsBalancedScreen()
+                         },
             title = stringResource(id = R.string.generated_teams),
         )
     }
