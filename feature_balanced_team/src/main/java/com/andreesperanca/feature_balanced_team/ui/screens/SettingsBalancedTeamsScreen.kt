@@ -26,8 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,10 +37,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.database.model.Settings
 import com.andreesperanca.feature_balanced_team.R
-import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeamsRepository
 import com.andreesperanca.feature_balanced_team.viewmodels.SettingsBalancedTeamsViewModel
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
@@ -66,19 +62,25 @@ fun SettingsBalancedTeamsScreen(
     var playersSliderPosition by remember { mutableIntStateOf(uiState.settings.quantityPlayer) }
     var teamsSliderPosition by remember { mutableIntStateOf(uiState.settings.quantityTeams) }
 
+    LaunchedEffect(Unit) {
+        val settings = viewModel.getSettings()
+        settings?.let {
+            playersSliderPosition = settings.quantityPlayer
+            teamsSliderPosition = settings.quantityTeams
+        }
+    }
+
+
     LaunchedEffect(uiState.settings) {
         viewModel.init()
     }
-
 
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
         Scaffold(
             topBar = {},
-
             content = {
                 Column(
                     modifier = modifier

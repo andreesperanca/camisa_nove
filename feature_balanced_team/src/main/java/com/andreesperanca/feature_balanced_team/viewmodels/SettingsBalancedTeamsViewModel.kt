@@ -1,5 +1,10 @@
 package com.andreesperanca.feature_balanced_team.viewmodels
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreesperanca.database.model.Settings
@@ -20,10 +25,11 @@ class SettingsBalancedTeamsViewModel(
         fetchSettings()
     }
 
+    suspend fun getSettings() = repository.fetchSettings()
     private fun fetchSettings() {
         viewModelScope.launch(Dispatchers.IO) {
             val settings = repository.fetchSettings()
-            if (settings != null) {
+            settings?.let {
                 playersUiState.update { currentState ->
                     currentState.copy(settings = settings)
                 }
@@ -35,14 +41,13 @@ class SettingsBalancedTeamsViewModel(
             repository.saveSettings(settings)
         }
     }
-
 }
 
 data class SettingsBalancedTeamsUiState(
     val settings: Settings = Settings(
+        quantityTeams = 1,
         quantityPlayer = 1,
-        useLevels = true,
-        quantityTeams = 1
+        useLevels = true
     ),
     val loadingState: Boolean = false
 )
