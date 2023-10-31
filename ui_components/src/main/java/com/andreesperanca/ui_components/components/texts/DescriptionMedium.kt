@@ -23,7 +23,8 @@ fun DescriptionSubtitleMedium(
     modifier: Modifier = Modifier,
     text: String
 ) {
-    Text(modifier = modifier,
+    Text(
+        modifier = modifier,
         fontSize = 14.sp,
         color = Color(0xFF49454F),
         text = text

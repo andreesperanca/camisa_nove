@@ -44,7 +44,7 @@ class PlayersViewModel(
         val quantidadeDeJogadores = 5
 
         for (i in 1..quantidadeDeTimes) {
-            teams.add(Team(name = "Team${i}", players = mutableListOf()))
+            teams.add(Team(name = "$i", players = mutableListOf()))
         }
 
         var notasMaximas: Float = 0F

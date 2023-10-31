@@ -1,12 +1,14 @@
-package com.andreesperanca.camisanove.screen
+ package com.andreesperanca.camisanove.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -15,8 +17,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,20 +76,50 @@ fun MainScreen(
                 .background(Color(0xFFFBF8FD))
 
         ) {
-            Spacer(modifier = Modifier.padding(top = 32.dp))
-            HighlightsCardView(
+            Spacer(modifier = Modifier.padding(top = dimensionResource(id = dimen.padding_large)))
 
-                image = painterResource(id = drawable.image),
-                title = "Times equilibrados",
-                description = "Times equilibrados",
-                ctaTitle = "Começar",
-                clickCta = {
-                    navigateToBalancedTeamFeature()
-                },
-                imageDescription = "Times equilibrados"
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = "Seu feedback é nosso motor",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = "Compartilhe suas ideias e sugestões para moldar o futuro da nossa plataforma.",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Button(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(
+                            top = dimensionResource(id = dimen.padding_small),
+                            end = dimensionResource(id = dimen.padding_large)),
+                    onClick = {
 
+                    },
+                ) {
+                    Text(text = "Sugerir")
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(top = dimensionResource(id = dimen.padding_large)))
+
+            HighlightsCardView(
+                image = painterResource(id = drawable.image),
+                title = "Times Equilibrados",
+                description = "Facilita comunicação, planejamento de eventos e competições saudáveis. Uma experiência esportiva envolvente que leva à vitória em equipe!",
+                ctaTitle = "Iniciar",
+                clickCta = { navigateToBalancedTeamFeature() },
+                imageDescription = "Times equilibrados"
+            )
         }
     }
 }

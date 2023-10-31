@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.andreesperanca.feature_balanced_team.data.mockTeamList
 import com.andreesperanca.feature_balanced_team.ui.components.TeamItem
+import com.andreesperanca.feature_balanced_team.utils.Teams
 import com.andreesperanca.ui_components.R.drawable
 import com.andreesperanca.ui_components.theme.C9Theme
 
@@ -50,8 +51,8 @@ fun BalancedTeamsScreen(
                     .fillMaxSize()
                     .padding(it)
             ) {
-                items(mockTeamList) {
-                    TeamItem(team = it)
+                items(Teams.teams) {team ->
+                    TeamItem(team = team)
                 }
             }
         }

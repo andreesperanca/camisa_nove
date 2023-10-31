@@ -3,10 +3,13 @@ package com.andreesperanca.camisanove.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.andreesperanca.camisanove.screen.MainScreen
+import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.ui.screens.AddPlayerScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.PlayersScreen

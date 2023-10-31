@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.feature_balanced_team.data.mockTeamList
-import com.andreesperanca.database.model.Team
 import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
@@ -28,7 +28,7 @@ fun TeamItem(team: Team) {
                     )
                 )
                 .fillMaxWidth(),
-            text = stringResource(id = R.string.feature_balanced_team_name)
+            text = stringResource(id = R.string.feature_balanced_team_name, team.name)
         )
 
         DescriptionMedium(
@@ -38,7 +38,7 @@ fun TeamItem(team: Team) {
                     start = dimensionResource(R.dimen.padding_medium),
                     end = dimensionResource(R.dimen.padding_medium)
                 ),
-            text = stringResource(R.string.feature_balanced_team_description)
+            text = stringResource(R.string.feature_balanced_team_description, team.formattedPoints())
         )
 
         Column(
@@ -48,12 +48,7 @@ fun TeamItem(team: Team) {
                     end = dimensionResource(id = R.dimen.padding_medium)
                 ),
             content = {
-                team.players.forEach {
-                    Text(
-
-
-                        text = it.name)
-                }
+                team.players.forEach { Text(text = it.name) }
             })
     }
 }

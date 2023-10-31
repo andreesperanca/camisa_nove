@@ -32,8 +32,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.feature_balanced_team.ui.components.PlayerItem
+import com.andreesperanca.feature_balanced_team.utils.Teams
 import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
 import com.andreesperanca.ui_components.R.drawable
 import com.andreesperanca.ui_components.components.buttons.ButtonLarge
@@ -166,8 +168,9 @@ fun PlayersScreen(
                 .padding(bottom = 16.dp)
                 .align(Alignment.BottomCenter),
             onClickCta = {
-                viewModel.balancedTeams()
-//                navigateToTeamsBalancedScreen()
+                val teams = viewModel.balancedTeams()
+                Teams.teams = teams
+                navigateToTeamsBalancedScreen()
                          },
             title = stringResource(id = R.string.generated_teams),
         )
