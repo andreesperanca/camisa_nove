@@ -61,7 +61,9 @@ fun MainScreen(
                 },
                 actions = {
                     Icon(
-                        modifier = Modifier.padding(PaddingValues(8.dp)),
+                        modifier = Modifier
+                            .alpha(0f)
+                            .padding(PaddingValues(8.dp)),
                         tint = Color(0xFF45464F),
                         painter = painterResource(id = R.drawable.ic_account),
                         contentDescription = stringResource(id = R.string.app_main_screen_my_account)
