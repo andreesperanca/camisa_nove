@@ -3,4 +3,10 @@
     <string name="app_main_screen_news">Novidades</string>
     <string name="app_main_screen_menu">Menu</string>
     <string name="app_main_screen_my_account">Minha conta</string>
+    <string name="main_screen_feedback_message">Seu feedback é nosso motor</string>
+    <string name="main_screen_feedback_description">Compartilhe suas ideias e sugestões para moldar o futuro da nossa plataforma.</string>
+    <string name="main_screen_balanced_teams_title">Times Equilibrados</string>
+    <string name="main_screen_balanced_teams_description">Facilita comunicação, planejamento de eventos e competições saudáveis. Uma experiência esportiva envolvente que leva à vitória em equipe!</string>
+    <string name="main_screen_balanced_teams_cta_title">Iniciar</string>
+    <string name="main_screen_feedback_message_cta_title">Sugerir</string>
 </resources>

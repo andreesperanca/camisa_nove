@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.feature_balanced_team.data.mockTeamList
 import com.andreesperanca.feature_balanced_team.ui.components.TeamItem
 import com.andreesperanca.feature_balanced_team.utils.Teams
@@ -62,7 +63,9 @@ fun BalancedTeamsScreen(
 @Preview
 @Composable
 fun BalancedTeamsScreenPreview() {
+    val navController = rememberNavController()
     C9Theme {
-//        BalancedTeamsScreen()
+        BalancedTeamsScreen(
+            navController = navController)
     }
 }

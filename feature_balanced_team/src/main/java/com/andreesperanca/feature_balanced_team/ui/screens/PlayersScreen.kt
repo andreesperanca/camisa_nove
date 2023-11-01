@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,8 +35,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.andreesperanca.database.model.Player
 import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.R
+import com.andreesperanca.feature_balanced_team.repository.PlayersRepository
 import com.andreesperanca.feature_balanced_team.ui.components.PlayerItem
 import com.andreesperanca.feature_balanced_team.utils.Teams
 import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
@@ -140,25 +146,34 @@ fun PlayersScreen(
                     .fillMaxWidth()
                     .padding(
                         start = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_small)
+                        end = dimensionResource(R.dimen.padding_medium)
                     ),
                 text = stringResource(R.string.players_screen_description)
             )
 
             LazyColumn(
                 modifier = Modifier
-                    .padding(bottom = 100.dp)
+                    .padding(
+                        start = dimensionResource(id = R.dimen.padding_medium),
+                        end = dimensionResource(id = R.dimen.padding_medium),
+                        bottom = 100.dp,
+                        top = dimensionResource(id = R.dimen.padding_small)
+                    )
                     .background(Color(0xFFEFEDF1))
             ) {
-                items(viewModel.playersUiState.value.playersList, key = { it.uid }) { player ->
+                itemsIndexed(viewModel.playersUiState.value.playersList) { index, player ->
                     PlayerItem(
-                        modifier = Modifier.animateItemPlacement(
-                            animationSpec = TweenSpec(200, 200, FastOutLinearInEasing)
-                        ),
                         player = player,
                         deletePlayerAction = { viewModel.deletePlayer(player) },
                     )
+                    if (index != viewModel.playersUiState.value.playersList.lastIndex) {
+                        Divider(
+                            modifier = Modifier
+                                .align(Alignment.Start),
+                            thickness = 0.8.dp,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                        )
+                    }
                 }
             }
         }
@@ -180,15 +195,25 @@ fun PlayersScreen(
 @Preview(showBackground = true)
 @Composable
 fun PlayersScreenPreview() {
+
+    class Ola() : PlayersRepository {
+        override suspend fun fetchPlayers(): List<Player> {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun deletePlayer(player: Player) {
+            TODO("Not yet implemented")
+        }
+    }
     C9Theme {
-//        val navController = rememberNavController()
-//        PlayersScreen(
-//            navController = navController,
-//            viewModel = PlayersViewModel(),
-//            navigateToAddPlayersScreen = {},
-//            navigateToSettingsScreen = {},
-//            navigateToTeamsBalancedScreen = {},
-//            navigateToBackStack = {}
-//        )
+        val navController = rememberNavController()
+        PlayersScreen(
+            navController = navController,
+            viewModel = PlayersViewModel(Ola()),
+            navigateToAddPlayersScreen = {},
+            navigateToSettingsScreen = {},
+            navigateToTeamsBalancedScreen = {},
+            navigateToBackStack = {}
+        )
     }
 }

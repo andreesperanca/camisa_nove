@@ -19,6 +19,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -30,7 +31,7 @@ import com.andreesperanca.ui_components.R.*
 import com.andreesperanca.ui_components.components.cards.HighlightsCardView
 import com.andreesperanca.ui_components.theme.C9Theme
 
-@OptIn(ExperimentalMaterial3Api::class)
+ @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
@@ -50,10 +51,12 @@ fun MainScreen(
                 },
                 navigationIcon = {
                     Icon(
-                        modifier = Modifier.padding(PaddingValues(8.dp)),
+                        modifier = Modifier
+                            .alpha(0f)
+                            .padding(PaddingValues(8.dp)),
                         tint = Color(0xFF45464F),
                         painter = painterResource(id = R.drawable.ic_menu),
-                        contentDescription = stringResource(id = R.string.app_main_screen_menu)
+                        contentDescription = stringResource(id = R.string.app_main_screen_menu),
                     )
                 },
                 actions = {
@@ -82,7 +85,7 @@ fun MainScreen(
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = dimen.padding_medium)
                 ),
-                text = "Seu feedback é nosso motor",
+                text = stringResource(R.string.main_screen_feedback_message),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -90,7 +93,7 @@ fun MainScreen(
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = dimen.padding_medium)
                 ),
-                text = "Compartilhe suas ideias e sugestões para moldar o futuro da nossa plataforma.",
+                text = stringResource(R.string.main_screen_feedback_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -101,12 +104,13 @@ fun MainScreen(
                         .align(Alignment.CenterEnd)
                         .padding(
                             top = dimensionResource(id = dimen.padding_small),
-                            end = dimensionResource(id = dimen.padding_large)),
+                            end = dimensionResource(id = dimen.padding_large)
+                        ),
                     onClick = {
 
                     },
                 ) {
-                    Text(text = "Sugerir")
+                    Text(text = stringResource(R.string.main_screen_feedback_message_cta_title))
                 }
             }
 
@@ -114,11 +118,11 @@ fun MainScreen(
 
             HighlightsCardView(
                 image = painterResource(id = drawable.image),
-                title = "Times Equilibrados",
-                description = "Facilita comunicação, planejamento de eventos e competições saudáveis. Uma experiência esportiva envolvente que leva à vitória em equipe!",
-                ctaTitle = "Iniciar",
+                title = stringResource(R.string.main_screen_balanced_teams_title),
+                description = stringResource(R.string.main_screen_balanced_teams_description),
+                ctaTitle = stringResource(R.string.main_screen_balanced_teams_cta_title),
                 clickCta = { navigateToBalancedTeamFeature() },
-                imageDescription = "Times equilibrados"
+                imageDescription = ""
             )
         }
     }
