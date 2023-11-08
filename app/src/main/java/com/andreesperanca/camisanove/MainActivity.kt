@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
 
                     val addPlayersViewModel = AddPlayersViewModel(repository = container.addPlayersRepository)
-                    val playersViewModel = PlayersViewModel(repository = container.playersRepository)
+                    val playersViewModel = PlayersViewModel(repository = container.playersRepository, container.settingsBalancedTeamsRepository)
                     val settingsBalancedTeamsViewModel = SettingsBalancedTeamsViewModel(container.settingsBalancedTeamsRepository)
 
                     RootNavigationGraph(

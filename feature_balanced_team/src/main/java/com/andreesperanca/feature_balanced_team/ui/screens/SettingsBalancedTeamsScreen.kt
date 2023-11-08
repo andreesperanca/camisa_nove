@@ -45,7 +45,7 @@ import com.andreesperanca.ui_components.components.texts.DescriptionMedium
 import com.andreesperanca.ui_components.components.texts.HeaderLarge
 import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
-import com.example.compose.md_theme_light_surfaceContainer
+import com.andreesperanca.ui_components.theme.md_theme_light_surfaceContainer
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)

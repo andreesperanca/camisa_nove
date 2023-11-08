@@ -3,17 +3,15 @@ package com.andreesperanca.camisanove.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.andreesperanca.camisanove.screen.MainScreen
-import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.ui.screens.AddPlayerScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.BalancedTeamsScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.PlayersScreen
 import com.andreesperanca.feature_balanced_team.ui.screens.SettingsBalancedTeamsScreen
+import com.andreesperanca.feature_balanced_team.utils.Teams
 import com.andreesperanca.feature_balanced_team.viewmodels.AddPlayersViewModel
 import com.andreesperanca.feature_balanced_team.viewmodels.PlayersViewModel
 import com.andreesperanca.feature_balanced_team.viewmodels.SettingsBalancedTeamsViewModel
@@ -78,7 +76,14 @@ fun NavGraphBuilder.teamsBalancedFeatureGraph(
                 )
         }
         composable(route = AppGraph.teams_balanced.BALANCED_TEAMS) {
-            BalancedTeamsScreen(navController = navController)
+            BalancedTeamsScreen(
+                navController = navController,
+                teams = Teams.teams,
+                navigateToPlayersScreen = { navController.popBackStack() },
+                navigateToShareTeams = {
+
+                },
+            )
         }
     }
 }
