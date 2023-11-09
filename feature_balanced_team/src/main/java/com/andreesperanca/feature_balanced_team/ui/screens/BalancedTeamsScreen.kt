@@ -1,7 +1,7 @@
 package com.andreesperanca.feature_balanced_team.ui.screens
 
 import android.graphics.Bitmap
-import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,21 +9,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.andreesperanca.database.model.Player
@@ -45,9 +44,9 @@ fun BalancedTeamsScreen(
     navigateToShareTeams: () -> Unit,
 ) {
 
-    val captureController = rememberCaptureController()
     val context = LocalContext.current
-
+    val captureController = rememberCaptureController()
+    val appName = stringResource(id = R.string.app_name)
 
     Scaffold(
         topBar = {
@@ -81,15 +80,26 @@ fun BalancedTeamsScreen(
             Capturable(
                 controller = captureController,
                 onCaptured = { imageBitmap, error ->
-                if (imageBitmap != null) {
-                    Image.saveToGallery(context = context, bitmap = imageBitmap, "asdasd")
-                }
-                if (error != null) { TODO() }
-            }) {
+                    if (imageBitmap != null) {
+                        Image.saveToGallery(
+                            context = context,
+                            bitmap = imageBitmap,
+                            albumName = appName
+                            )
+                    }
+                    if (error != null) {
+                        TODO()
+                    }
+                }) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RectangleShape
+                        )
+
                 ) {
                     items(teams) { team ->
                         TeamItem(team = team)
