@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andreesperanca.camisanove.R
 import com.andreesperanca.ui_components.R.*
-import com.andreesperanca.ui_components.components.cards.HighlightsCardView
 import com.andreesperanca.ui_components.theme.C9Theme
 
  @OptIn(ExperimentalMaterial3Api::class)
@@ -118,13 +117,56 @@ fun MainScreen(
 
             Spacer(modifier = Modifier.padding(top = dimensionResource(id = dimen.padding_large)))
 
-            HighlightsCardView(
-                image = painterResource(id = drawable.image),
-                title = stringResource(R.string.main_screen_balanced_teams_title),
-                description = stringResource(R.string.main_screen_balanced_teams_description),
-                ctaTitle = stringResource(R.string.main_screen_balanced_teams_cta_title),
-                clickCta = { navigateToBalancedTeamFeature() },
-                imageDescription = ""
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = stringResource(R.string.main_screen_balanced_teams_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = stringResource(R.string.main_screen_balanced_teams_description),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Button(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(
+                            top = dimensionResource(id = dimen.padding_small),
+                            end = dimensionResource(id = dimen.padding_large)
+                        ),
+                    onClick = {
+
+                    },
+                ) {
+                    Text(text = stringResource(R.string.main_screen_balanced_teams_cta_title))
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(top = dimensionResource(id = dimen.padding_large)))
+
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = stringResource(R.string.main_screen_beta_version_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = dimen.padding_medium)
+                ),
+                text = stringResource(R.string.main_screen_beta_version_description),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

@@ -6,7 +6,9 @@
     <string name="main_screen_feedback_message">Seu feedback é nosso motor</string>
     <string name="main_screen_feedback_description">Compartilhe suas ideias e sugestões para moldar o futuro da nossa plataforma.</string>
     <string name="main_screen_balanced_teams_title">Times Equilibrados</string>
-    <string name="main_screen_balanced_teams_description">Facilita comunicação, planejamento de eventos e competições saudáveis. Uma experiência esportiva envolvente que leva à vitória em equipe!</string>
-    <string name="main_screen_balanced_teams_cta_title">Iniciar</string>
+    <string name="main_screen_balanced_teams_description">Divida as equipes por nível e equilibre o jogo para partidas mais competitivas e justas.</string>
+    <string name="main_screen_balanced_teams_cta_title">Começar</string>
     <string name="main_screen_feedback_message_cta_title">Sugerir</string>
+    <string name="main_screen_beta_version_title">Versão BETA</string>
+    <string name="main_screen_beta_version_description">Seja um dos primeiros a experimentar e aprimorar nosso aplicativo. Buscamos feedback dos usuários para melhorar. Junte-se a nós e ajude a aprimorar a experiência esportiva!</string>
 </resources>
