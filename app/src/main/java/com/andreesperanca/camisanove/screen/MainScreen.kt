@@ -142,9 +142,7 @@ fun MainScreen(
                             top = dimensionResource(id = dimen.padding_small),
                             end = dimensionResource(id = dimen.padding_large)
                         ),
-                    onClick = {
-
-                    },
+                    onClick = { navigateToBalancedTeamFeature() },
                 ) {
                     Text(text = stringResource(R.string.main_screen_balanced_teams_cta_title))
                 }

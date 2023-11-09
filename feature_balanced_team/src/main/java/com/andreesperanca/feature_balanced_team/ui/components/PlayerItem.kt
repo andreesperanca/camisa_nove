@@ -34,6 +34,11 @@ fun PlayerItem(
 ) {
 
     val playerLevel = stringResource(R.string.feature_balanced_team_player_level, String.format("%.1f", player.level))
+    val specialPlayer = if (player.isSpecialPLayer) {
+        stringResource(id = R.string.feature_balanced_team_special_player, player.name)
+    } else {
+        player.name
+    }
 
     Surface(
         modifier = Modifier
@@ -49,7 +54,7 @@ fun PlayerItem(
 
             Column(modifier = Modifier.align(Alignment.CenterStart)) {
                 Text(
-                    text = player.name,
+                    text = specialPlayer,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
