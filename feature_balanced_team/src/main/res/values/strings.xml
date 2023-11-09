@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">C9</string>
     <string name="feature_balanced_players">"Jogadores [ %s ] "</string>
     <string name="feature_balanced_team_balance_teams">Equilibrar equipes</string>
     <string name="feature_balanced_team_back_button_description">Botão de voltar</string>
