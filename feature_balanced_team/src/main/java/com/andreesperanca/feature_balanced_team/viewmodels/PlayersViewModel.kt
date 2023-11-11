@@ -11,6 +11,7 @@ import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeams
 import com.andreesperanca.feature_balanced_team.utils.Teams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class PlayersViewModel(
     private val repository: PlayersRepository,
@@ -95,20 +96,29 @@ class PlayersViewModel(
         normalPlayersAux.addAll(normalPlayers)
 
         teams.forEach { team ->
-            for (i in 0..4) {
-                var teamPoints = 0F
+            var teamPoints = 0F
+            for (i in 0 until normalPlayersAux.size) {
 
                 if (normalPlayersAux.size != 0) {
                     val player = normalPlayersAux.random()
-                    teamPoints += player.level
-                    normalPlayersAux.remove(player)
-                    team.players.add(player)
+                    if ((teamPoints + player.level) < pointsForEachTeam) {
+                        teamPoints += player.level
+                        normalPlayersAux.remove(player)
+                        team.players.add(player)
+                    }
                 } else {
                     return@forEach
                 }
-
                 if (teamPoints >= pointsForEachTeam || team.players.size >= playersQuantity) {
                     return@forEach
+                }
+            }
+        }
+
+        teams.forEach {
+            if (it.players.size < playersQuantity) {
+                normalPlayersAux.forEach { player ->
+                    it.players.add(player)
                 }
             }
         }
