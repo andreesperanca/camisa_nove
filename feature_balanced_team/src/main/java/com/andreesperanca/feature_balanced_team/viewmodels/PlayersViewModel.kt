@@ -4,14 +4,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreesperanca.database.model.Player
-import com.andreesperanca.database.model.Settings
 import com.andreesperanca.database.model.Team
 import com.andreesperanca.feature_balanced_team.repository.PlayersRepository
 import com.andreesperanca.feature_balanced_team.repository.SettingsBalancedTeamsRepository
 import com.andreesperanca.feature_balanced_team.utils.Teams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.random.Random
+import java.math.BigDecimal
 
 class PlayersViewModel(
     private val repository: PlayersRepository,
@@ -77,11 +76,11 @@ class PlayersViewModel(
             teams.add(Team(name = "$i", players = mutableListOf()))
         }
 
-        var maxTeamPoints = 0F
+        var maxTeamPoints = BigDecimal(0.0)
 
         players.forEach { player -> maxTeamPoints += player.level }
 
-        val pointsForEachTeam = maxTeamPoints / teamsQuantity
+        val pointsForEachTeam = maxTeamPoints / teamsQuantity.toBigDecimal()
 
         val specialPlayers = players.filter { player -> player.isSpecialPLayer }
 
@@ -96,7 +95,7 @@ class PlayersViewModel(
         normalPlayersAux.addAll(normalPlayers)
 
         teams.forEach { team ->
-            var teamPoints = 0F
+            var teamPoints = BigDecimal(0.0)
             for (i in 0 until normalPlayersAux.size) {
 
                 if (normalPlayersAux.size != 0) {
@@ -115,13 +114,23 @@ class PlayersViewModel(
             }
         }
 
-        teams.forEach {
-            if (it.players.size < playersQuantity) {
-                normalPlayersAux.forEach { player ->
-                    it.players.add(player)
+        val teamsWithoutPlayers = teams.filter { team -> team.players.size < playersQuantity }
+
+        teams.removeAll(teamsWithoutPlayers)
+
+        teamsWithoutPlayers.sortedByDescending { team -> team.calculatePoints() }.apply {
+            //Adicionar o jogador com menos pontos
+            this.forEach { team ->
+                if (normalPlayersAux.size != 0) {
+                    normalPlayersAux.sortedByDescending { it.level }
+                    team.players.add(normalPlayersAux.first())
+                    normalPlayersAux.remove(normalPlayersAux.first())
                 }
             }
         }
+
+        teams.addAll(teamsWithoutPlayers)
+
         return teams
     }
 }

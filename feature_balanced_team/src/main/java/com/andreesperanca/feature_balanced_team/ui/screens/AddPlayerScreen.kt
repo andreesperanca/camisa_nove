@@ -54,6 +54,10 @@ import com.andreesperanca.ui_components.components.texts.TitleMedium
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.andreesperanca.ui_components.theme.md_theme_light_surfaceContainer
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,7 +70,7 @@ fun AddPlayerScreen(
 
     var nameEditText by remember { mutableStateOf("") }
 
-    var levelSlider by remember { mutableFloatStateOf(0.5f) }
+    var levelSlider by remember { mutableStateOf(BigDecimal(0.5)) }
     val levelFormat = String.format("%.1f", levelSlider)
 
     var playerNameIsInvalid by rememberSaveable { mutableStateOf(false) }
@@ -221,8 +225,8 @@ fun AddPlayerScreen(
                             start = dimensionResource(id = R.dimen.padding_medium),
                             end = dimensionResource(id = R.dimen.padding_medium)
                         ),
-                        value = levelSlider,
-                        onValueChange = { levelSlider = it },
+                        value = levelSlider.toFloat(),
+                        onValueChange = { levelSlider = it.toBigDecimal() },
                         colors = SliderDefaults.colors(),
                         valueRange = 0.5f..5f
                     )
@@ -262,7 +266,7 @@ fun AddPlayerScreen(
                         .align(Alignment.BottomCenter),
                     onClickCta = {
                         if (nameEditText.isValidName()) {
-                            val newPlayer = Player(name = nameEditText, level = levelSlider, isSpecialPLayer = specialPlayer)
+                            val newPlayer = Player(name = nameEditText, level = levelSlider.round(MathContext(1,RoundingMode.HALF_DOWN)).setScale(BigDecimal.ROUND_HALF_EVEN), isSpecialPLayer = specialPlayer)
                             viewModel.addPlayer(newPlayer)
                             nameEditText = ""
                             specialPlayer = false

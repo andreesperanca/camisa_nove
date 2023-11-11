@@ -1,11 +1,13 @@
 package com.andreesperanca.database.model
 
+import java.math.BigDecimal
+
 data class Team(
     val name: String,
     val players: MutableList<Player>
 ) {
-    fun calculatePoints() : Float {
-        var totalPoints = 0.0f
+    fun calculatePoints() : BigDecimal {
+        var totalPoints = BigDecimal.ZERO
         for (player in players) {
             totalPoints += player.level
         }

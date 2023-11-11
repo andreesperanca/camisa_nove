@@ -25,6 +25,7 @@ import com.andreesperanca.feature_balanced_team.R
 import com.andreesperanca.ui_components.R.*
 import com.andreesperanca.ui_components.theme.C9Theme
 import com.andreesperanca.ui_components.theme.md_theme_light_surfaceContainer
+import java.math.BigDecimal
 
 @Composable
 fun PlayerItem(
@@ -82,7 +83,7 @@ fun PlayerItem(
 @Preview
 @Composable
 fun PlayerItemPreview() {
-    val player = Player(1, "André", 1.233f, false)
+    val player = Player(1, "André", BigDecimal(0.0), false)
     C9Theme {
         PlayerItem(player = player, deletePlayerAction = {})
     }

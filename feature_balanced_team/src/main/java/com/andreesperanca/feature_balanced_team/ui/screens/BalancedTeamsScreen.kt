@@ -34,6 +34,7 @@ import com.andreesperanca.ui_components.R.drawable
 import com.andreesperanca.ui_components.theme.C9Theme
 import dev.shreyaspatil.capturable.Capturable
 import dev.shreyaspatil.capturable.controller.rememberCaptureController
+import java.math.BigDecimal
 
 @Composable
 fun BalancedTeamsScreen(
@@ -50,7 +51,7 @@ fun BalancedTeamsScreen(
 
     Scaffold(
         topBar = {
-                 Box(modifier = Modifier
+                 Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)
                      .padding(
                          start = dimensionResource(id = R.dimen.padding_small),
                          end = dimensionResource(id = R.dimen.padding_small),
@@ -118,17 +119,17 @@ fun BalancedTeamsScreenPreview() {
         Team(
             name = "1",
             players = mutableListOf(
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false),
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false),
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false)
+                Player(uid = 1, name = "andre", level = BigDecimal(4.3), isSpecialPLayer = false),
+                Player(uid = 1, name = "andre", level = BigDecimal(3.2), isSpecialPLayer = false),
+                Player(uid = 1, name = "andre", level = BigDecimal(2.0), isSpecialPLayer = false)
             )
         ),
         Team(
             name = "1",
             players = mutableListOf(
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false),
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false),
-                Player(uid = 1, name = "andre", level = 0f, isSpecialPLayer = false)
+                Player(uid = 1, name = "andre", level = BigDecimal(0.0), isSpecialPLayer = false),
+                Player(uid = 1, name = "andre", level = BigDecimal(0.9), isSpecialPLayer = false),
+                Player(uid = 1, name = "andre", level = BigDecimal(1.0), isSpecialPLayer = false)
             )
         )
     )

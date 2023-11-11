@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.andreesperanca.database.dao.PlayerDao
 import com.andreesperanca.database.dao.SettingsDao
 import com.andreesperanca.database.model.Player
 import com.andreesperanca.database.model.Settings
+import com.andreesperanca.database.util.BigDecimalConverter
 
 @Database(entities = [Player::class, Settings::class], version = 1, exportSchema = false)
+@TypeConverters(BigDecimalConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun playersDao(): PlayerDao
